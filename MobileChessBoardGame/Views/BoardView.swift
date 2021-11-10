@@ -12,16 +12,25 @@ class BoardView: UIView {
     var originX: CGFloat = -31
     var originY: CGFloat = -4
     var cellSide: CGFloat = -13
+    var shadowPieces = Set<ChessPiece>()
     
     override func draw(_ rect: CGRect) {
         cellSide = bounds.width * ratio / 8
         originX = bounds.width * (1 - ratio) / 2
         originY = bounds.height * (1 - ratio) / 2
         drawBoard()
+        drawPieces()
     }
 }
 
 private extension BoardView {
+    func drawPieces() {
+        for shadowPiece in shadowPieces {
+            let pieceImage = UIImage(named: shadowPiece.imageName)
+            pieceImage?.draw(in: CGRect(x: originX + CGFloat(shadowPiece.column) * cellSide, y: originY + CGFloat(shadowPiece.row) * cellSide, width: cellSide, height: cellSide))
+        }
+    }
+    
     func drawBoard() {
         for row in 0..<4 {
             for column in 0..<4 {

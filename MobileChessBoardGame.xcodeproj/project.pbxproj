@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		172BB71A27385CBB00A5E3CC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172BB71927385CBB00A5E3CC /* AppDelegate.swift */; };
 		172BB71C27385CBB00A5E3CC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172BB71B27385CBB00A5E3CC /* SceneDelegate.swift */; };
-		172BB71E27385CBB00A5E3CC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172BB71D27385CBB00A5E3CC /* ViewController.swift */; };
+		172BB71E27385CBB00A5E3CC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172BB71D27385CBB00A5E3CC /* HomeViewController.swift */; };
 		172BB72127385CBB00A5E3CC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 172BB71F27385CBB00A5E3CC /* Main.storyboard */; };
 		172BB72327385CBC00A5E3CC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 172BB72227385CBC00A5E3CC /* Assets.xcassets */; };
 		172BB72627385CBC00A5E3CC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 172BB72427385CBC00A5E3CC /* LaunchScreen.storyboard */; };
@@ -42,7 +42,7 @@
 		172BB71627385CBB00A5E3CC /* MobileChessBoardGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobileChessBoardGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		172BB71927385CBB00A5E3CC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		172BB71B27385CBB00A5E3CC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		172BB71D27385CBB00A5E3CC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		172BB71D27385CBB00A5E3CC /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		172BB72027385CBB00A5E3CC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		172BB72227385CBC00A5E3CC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		172BB72527385CBC00A5E3CC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -105,12 +105,11 @@
 		172BB71827385CBB00A5E3CC /* MobileChessBoardGame */ = {
 			isa = PBXGroup;
 			children = (
+				176C4C14273C672E00D69A06 /* ViewControllers */,
 				176C4C0F273C646600D69A06 /* Models */,
 				172BB74927385D6B00A5E3CC /* Views */,
 				172BB71927385CBB00A5E3CC /* AppDelegate.swift */,
 				172BB71B27385CBB00A5E3CC /* SceneDelegate.swift */,
-				172BB71D27385CBB00A5E3CC /* ViewController.swift */,
-				172BB71F27385CBB00A5E3CC /* Main.storyboard */,
 				172BB72227385CBC00A5E3CC /* Assets.xcassets */,
 				172BB72427385CBC00A5E3CC /* LaunchScreen.storyboard */,
 				172BB72727385CBC00A5E3CC /* Info.plist */,
@@ -138,6 +137,7 @@
 		172BB74927385D6B00A5E3CC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				172BB71F27385CBB00A5E3CC /* Main.storyboard */,
 				172BB74A27385D9E00A5E3CC /* BoardView.swift */,
 			);
 			path = Views;
@@ -150,6 +150,14 @@
 				176C4C12273C64A100D69A06 /* ChessPiece.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		176C4C14273C672E00D69A06 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				172BB71D27385CBB00A5E3CC /* HomeViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -283,7 +291,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				172BB71E27385CBB00A5E3CC /* ViewController.swift in Sources */,
+				172BB71E27385CBB00A5E3CC /* HomeViewController.swift in Sources */,
 				172BB74B27385D9E00A5E3CC /* BoardView.swift in Sources */,
 				172BB71A27385CBB00A5E3CC /* AppDelegate.swift in Sources */,
 				176C4C11273C647D00D69A06 /* ChessEngine.swift in Sources */,
