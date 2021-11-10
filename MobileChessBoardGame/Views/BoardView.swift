@@ -21,6 +21,20 @@ class BoardView: UIView {
         drawBoard()
         drawPieces()
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let firstTouch = touches.first!
+        let fingerLocation = firstTouch.location(in: self)
+        let fromColumn: Int = Int((fingerLocation.x - originX) / cellSide)
+        let fromRow: Int = Int((fingerLocation.y - originY) / cellSide)
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let firstTouch = touches.first!
+        let fingerLocation = firstTouch.location(in: self)
+        let toColumn: Int = Int((fingerLocation.x - originX) / cellSide)
+        let toRow: Int = Int((fingerLocation.y - originY) / cellSide)
+    }
 }
 
 private extension BoardView {
