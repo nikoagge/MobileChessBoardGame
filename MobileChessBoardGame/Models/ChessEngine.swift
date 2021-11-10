@@ -10,6 +10,22 @@ import Foundation
 struct ChessEngine {
     var pieces: Set<ChessPiece> = Set<ChessPiece>()
     
+    mutating func movePiece(fromColumn: Int, fromRow: Int, toColumn: Int, toRow: Int) {
+        guard let candidate = pieceAt(column: fromColumn, row: fromRow) else { return }
+        pieces.remove(candidate)
+        pieces.insert(ChessPiece(column: toColumn, row: toRow, imageName: candidate.imageName))
+    }
+    
+    func pieceAt(column: Int, row: Int) -> ChessPiece? {
+        for piece in pieces {
+            if column == piece.column && row == piece.row {
+                return piece
+            }
+        }
+        
+        return nil
+    }
+    
     mutating func initializeGame() {
         pieces.removeAll()
         pieces.insert(ChessPiece(column: 0, row: 0, imageName: "Rook-black"))

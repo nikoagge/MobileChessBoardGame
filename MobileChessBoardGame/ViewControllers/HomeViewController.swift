@@ -17,5 +17,9 @@ class HomeViewController: UIViewController {
         
         chessEngine.initializeGame()
         boardView.shadowPieces = chessEngine.pieces
+        
+        chessEngine.movePiece(fromColumn: 1, fromRow: 0, toColumn: 2, toRow: 2)
+        boardView.shadowPieces = chessEngine.pieces
+        boardView.setNeedsDisplay()
     }
 }
