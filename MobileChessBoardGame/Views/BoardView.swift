@@ -13,6 +13,9 @@ class BoardView: UIView {
     var originY: CGFloat = -4
     var cellSide: CGFloat = -13
     var shadowPieces = Set<ChessPiece>()
+    var chessDelegate: ChessDelegate? = nil
+    var fromColumn: Int = -4
+    var fromRow: Int = -13
     
     override func draw(_ rect: CGRect) {
         cellSide = bounds.width * ratio / 8
@@ -25,8 +28,8 @@ class BoardView: UIView {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let firstTouch = touches.first!
         let fingerLocation = firstTouch.location(in: self)
-        let fromColumn: Int = Int((fingerLocation.x - originX) / cellSide)
-        let fromRow: Int = Int((fingerLocation.y - originY) / cellSide)
+        fromColumn = Int((fingerLocation.x - originX) / cellSide)
+        fromRow = Int((fingerLocation.y - originY) / cellSide)
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -34,6 +37,8 @@ class BoardView: UIView {
         let fingerLocation = firstTouch.location(in: self)
         let toColumn: Int = Int((fingerLocation.x - originX) / cellSide)
         let toRow: Int = Int((fingerLocation.y - originY) / cellSide)
+        
+        chessDelegate?.movePiece(fromColumn: fromColumn, fromRow: fromRow, toColumn: toColumn, toRow: toRow)
     }
 }
 
