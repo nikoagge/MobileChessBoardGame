@@ -11,6 +11,10 @@ struct ChessEngine {
     var pieces: Set<ChessPiece> = Set<ChessPiece>()
     
     mutating func movePiece(fromColumn: Int, fromRow: Int, toColumn: Int, toRow: Int) {
+        if fromColumn == toColumn && fromRow == toRow {
+            return
+        }
+        
         guard let candidate = pieceAt(column: fromColumn, row: fromRow) else { return }
         pieces.remove(candidate)
         pieces.insert(ChessPiece(column: toColumn, row: toRow, imageName: candidate.imageName))
