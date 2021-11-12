@@ -16,6 +16,9 @@ class BoardView: UIView {
     var chessDelegate: ChessDelegate? = nil
     var fromColumn: Int = -4
     var fromRow: Int = -13
+    var movingImage: UIImage? = nil
+    var movingPieceX: CGFloat = -4
+    var movingPieceY: CGFloat = -4
     
     override func draw(_ rect: CGRect) {
         cellSide = bounds.width * ratio / 8
@@ -32,6 +35,14 @@ class BoardView: UIView {
         fromRow = Int((fingerLocation.y - originY) / cellSide)
     }
     
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let first = touches.first!
+        let fingerLocation = first.location(in: self)
+        movingPieceX = fingerLocation.x
+        movingPieceY = fingerLocation.y
+        setNeedsDisplay()
+    }
+    
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         let firstTouch = touches.first!
         let fingerLocation = firstTouch.location(in: self)
@@ -39,6 +50,7 @@ class BoardView: UIView {
         let toRow: Int = Int((fingerLocation.y - originY) / cellSide)
         
         chessDelegate?.movePiece(fromColumn: fromColumn, fromRow: fromRow, toColumn: toColumn, toRow: toRow)
+        movingImage = nil
     }
 }
 
@@ -47,6 +59,7 @@ private extension BoardView {
         for shadowPiece in shadowPieces {
             let pieceImage = UIImage(named: shadowPiece.imageName)
             pieceImage?.draw(in: CGRect(x: originX + CGFloat(shadowPiece.column) * cellSide, y: originY + CGFloat(shadowPiece.row) * cellSide, width: cellSide, height: cellSide))
+            movingImage?.draw(in: CGRect(x: movingPieceX - (cellSide / 2), y: movingPieceY - (cellSide / 2), width: cellSide, height: cellSide))
         }
     }
     

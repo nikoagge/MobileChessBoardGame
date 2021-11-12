@@ -16,7 +16,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         
         chessEngine.initializeGame()
-        boardView.configuration
+        boardViewConfiguration()
     }
 }
 
@@ -25,6 +25,10 @@ extension HomeViewController: ChessDelegate {
         chessEngine.movePiece(fromColumn: fromColumn, fromRow: fromRow, toColumn: toColumn, toRow: toRow)
         boardView.shadowPieces = chessEngine.pieces
         boardView.setNeedsDisplay()
+    }
+    
+    func pieceAt(column: Int, row: Int) -> ChessPiece? {
+        return chessEngine.pieceAt(column: column, row: row)
     }
 }
 
