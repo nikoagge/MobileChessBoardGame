@@ -6,15 +6,18 @@
 //
 
 import UIKit
+import AVFoundation
 
 class HomeViewController: UIViewController {
     @IBOutlet weak var boardView: BoardView!
     
     var chessEngine = ChessEngine()
+    var audioPlayer: AVAudioPlayer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        audioPlayerConfiguration()
         chessEngine.initializeGame()
         boardViewConfiguration()
     }
@@ -25,6 +28,7 @@ extension HomeViewController: ChessDelegate {
         chessEngine.movePiece(fromColumn: fromColumn, fromRow: fromRow, toColumn: toColumn, toRow: toRow)
         boardView.shadowPieces = chessEngine.pieces
         boardView.setNeedsDisplay()
+        audioPlayer.play()
     }
     
     func pieceAt(column: Int, row: Int) -> ChessPiece? {
@@ -33,6 +37,11 @@ extension HomeViewController: ChessDelegate {
 }
 
 private extension HomeViewController {
+    func audioPlayerConfiguration() {
+        let url = Bundle.main.url(forResource: "chess-move", withExtension: "wav")!
+        audioPlayer = try? AVAudioPlayer(contentsOf: url)
+    }
+    
     func boardViewConfiguration() {
         boardView.shadowPieces = chessEngine.pieces
         boardView.setNeedsDisplay()
