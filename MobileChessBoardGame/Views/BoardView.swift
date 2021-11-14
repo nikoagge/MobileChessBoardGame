@@ -20,6 +20,7 @@ class BoardView: UIView {
     var movingImage: UIImage? = nil
     var movingPieceX: CGFloat = -4
     var movingPieceY: CGFloat = -4
+    var blackChessPiecesAtTop = true
     
     override func draw(_ rect: CGRect) {
         cellSide = bounds.width * ratio / 8
@@ -32,8 +33,8 @@ class BoardView: UIView {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let firstTouch = touches.first!
         let fingerLocation = firstTouch.location(in: self)
-        fromColumn = Int((fingerLocation.x - originX) / cellSide)
-        fromRow = Int((fingerLocation.y - originY) / cellSide)
+        fromColumn = peer2PeerBasedConfiguration(coordinate: Int((fingerLocation.x - originX) / cellSide))
+        fromRow = peer2PeerBasedConfiguration(coordinate: Int((fingerLocation.y - originY) / cellSide))
         if let fromColumn = fromColumn, let fromRow = fromRow, let movingPiece = chessDelegate?.pieceAt(column: fromColumn, row: fromRow) {
             movingImage = UIImage(named: movingPiece.imageName)
         }
@@ -50,8 +51,8 @@ class BoardView: UIView {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         let firstTouch = touches.first!
         let fingerLocation = firstTouch.location(in: self)
-        let toColumn: Int = Int((fingerLocation.x - originX) / cellSide)
-        let toRow: Int = Int((fingerLocation.y - originY) / cellSide)
+        let toColumn: Int = peer2PeerBasedConfiguration(coordinate: Int((fingerLocation.x - originX) / cellSide))
+        let toRow: Int = peer2PeerBasedConfiguration(coordinate: Int((fingerLocation.y - originY) / cellSide))
         
         if let fromColumn = fromColumn, let fromRow = fromRow, fromColumn != toColumn || fromRow != toRow {
             chessDelegate?.movePiece(fromColumn: fromColumn, fromRow: fromRow, toColumn: toColumn, toRow: toRow)
@@ -67,7 +68,7 @@ private extension BoardView {
     func drawPieces() {
         for shadowPiece in shadowPieces where fromColumn != shadowPiece.column || fromRow != shadowPiece.row {
             let pieceImage = UIImage(named: shadowPiece.imageName)
-            pieceImage?.draw(in: CGRect(x: originX + CGFloat(shadowPiece.column) * cellSide, y: originY + CGFloat(shadowPiece.row) * cellSide, width: cellSide, height: cellSide))
+            pieceImage?.draw(in: CGRect(x: originX + CGFloat(peer2PeerBasedConfiguration(coordinate: shadowPiece.column)) * cellSide, y: originY + CGFloat(peer2PeerBasedConfiguration(coordinate: shadowPiece.row)) * cellSide, width: cellSide, height: cellSide))
             movingImage?.draw(in: CGRect(x: movingPieceX - (cellSide / 2), y: movingPieceY - (cellSide / 2), width: cellSide, height: cellSide))
         }
     }
@@ -87,5 +88,9 @@ private extension BoardView {
         let bezierPath = UIBezierPath(rect: CGRect(x: originX + CGFloat(column) * cellSide, y: originY + CGFloat(row) * cellSide, width: cellSide, height: cellSide))
         color.setFill()
         bezierPath.fill()
+    }
+    
+    func peer2PeerBasedConfiguration(coordinate: Int) -> Int {
+        return blackChessPiecesAtTop ? coordinate : 7 - coordinate
     }
 }

@@ -34,6 +34,7 @@ class HomeViewController: UIViewController {
     
     @IBAction func resetButtonTouchUpInside(_ sender: UIButton) {
         chessEngine.initializeGame()
+        boardView.blackChessPiecesAtTop = true
         boardView.shadowPieces = chessEngine.pieces
         boardView.setNeedsDisplay()
     }
@@ -42,6 +43,9 @@ class HomeViewController: UIViewController {
         nearbyServiceAdvertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: "napps-chess")
         nearbyServiceAdvertiser.delegate = self
         nearbyServiceAdvertiser.startAdvertisingPeer()
+        
+        boardView.blackChessPiecesAtTop = false
+        boardView.setNeedsDisplay()
     }
     
     @IBAction func joinButtonTouchUpInside(_ sender: UIButton) {
