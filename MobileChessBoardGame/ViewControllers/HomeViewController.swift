@@ -36,6 +36,18 @@ class HomeViewController: UIViewController {
         boardView.shadowPieces = chessEngine.pieces
         boardView.setNeedsDisplay()
     }
+    
+    @IBAction func advertiseButtonTouchUpInside(_ sender: UIButton) {
+        nearbyServiceAdvertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: "napps-chess")
+        nearbyServiceAdvertiser.delegate = self
+        nearbyServiceAdvertiser.startAdvertisingPeer()
+    }
+    
+    @IBAction func joinButtonTouchUpInside(_ sender: UIButton) {
+        let browserViewController = MCBrowserViewController(serviceType: "napps-chess", session: session)
+        browserViewController.delegate = self
+        present(browserViewController, animated: true)
+    }
 }
 
 extension HomeViewController: ChessDelegate {
