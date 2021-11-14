@@ -3,12 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 53;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		172BB71A27385CBB00A5E3CC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172BB71927385CBB00A5E3CC /* AppDelegate.swift */; };
-		172BB71C27385CBB00A5E3CC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172BB71B27385CBB00A5E3CC /* SceneDelegate.swift */; };
 		172BB71E27385CBB00A5E3CC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172BB71D27385CBB00A5E3CC /* HomeViewController.swift */; };
 		172BB72127385CBB00A5E3CC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 172BB71F27385CBB00A5E3CC /* Main.storyboard */; };
 		172BB72327385CBC00A5E3CC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 172BB72227385CBC00A5E3CC /* Assets.xcassets */; };
@@ -44,7 +43,6 @@
 /* Begin PBXFileReference section */
 		172BB71627385CBB00A5E3CC /* MobileChessBoardGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobileChessBoardGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		172BB71927385CBB00A5E3CC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		172BB71B27385CBB00A5E3CC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		172BB71D27385CBB00A5E3CC /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		172BB72027385CBB00A5E3CC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		172BB72227385CBC00A5E3CC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -117,7 +115,6 @@
 				176C4C0F273C646600D69A06 /* Models */,
 				172BB74927385D6B00A5E3CC /* Views */,
 				172BB71927385CBB00A5E3CC /* AppDelegate.swift */,
-				172BB71B27385CBB00A5E3CC /* SceneDelegate.swift */,
 				172BB72427385CBC00A5E3CC /* LaunchScreen.storyboard */,
 				172BB72727385CBC00A5E3CC /* Info.plist */,
 			);
@@ -266,7 +263,7 @@
 				};
 			};
 			buildConfigurationList = 172BB71127385CBB00A5E3CC /* Build configuration list for PBXProject "MobileChessBoardGame" */;
-			compatibilityVersion = "Xcode 13.0";
+			compatibilityVersion = "Xcode 11.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -324,7 +321,6 @@
 				1762D218273D765100534636 /* ChessDelegate.swift in Sources */,
 				172BB71A27385CBB00A5E3CC /* AppDelegate.swift in Sources */,
 				176C4C11273C647D00D69A06 /* ChessEngine.swift in Sources */,
-				172BB71C27385CBB00A5E3CC /* SceneDelegate.swift in Sources */,
 				176C4C13273C64A100D69A06 /* ChessPiece.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -432,7 +428,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -487,7 +483,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -513,6 +509,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -542,6 +539,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
