@@ -11,13 +11,25 @@ struct ChessEngine {
     var pieces: Set<ChessPiece> = Set<ChessPiece>()
     
     mutating func movePiece(fromColumn: Int, fromRow: Int, toColumn: Int, toRow: Int) {
-        if fromColumn == toColumn && fromRow == toRow {
+        if !canMovePiece(fromColumn: fromColumn, fromRow: fromRow, toColumn: toColumn, toRow: toRow) {
             return
         }
         
         guard let candidate = pieceAt(column: fromColumn, row: fromRow) else { return }
+        
+        if let target = pieceAt(column: toColumn, row: toRow) {
+            if target.isBlack == candidate.isBlack {
+                return
+            }
+            pieces.remove(target)
+        }
+        
         pieces.remove(candidate)
         pieces.insert(ChessPiece(column: toColumn, row: toRow, imageName: candidate.imageName, isBlack: candidate.isBlack))
+    }
+    
+    func canMovePiece(fromColumn: Int, fromRow: Int, toColumn: Int, toRow: Int) -> Bool {
+        return fromColumn == toColumn && fromRow == toRow ? false : true
     }
     
     func pieceAt(column: Int, row: Int) -> ChessPiece? {

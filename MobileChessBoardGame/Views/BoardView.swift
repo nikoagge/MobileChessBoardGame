@@ -58,6 +58,7 @@ class BoardView: UIView {
         movingImage = nil
         fromColumn = nil
         fromRow = nil
+        setNeedsDisplay()
     }
 }
 
