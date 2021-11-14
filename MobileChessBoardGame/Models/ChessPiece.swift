@@ -11,4 +11,5 @@ struct ChessPiece: Hashable {
     let column: Int
     let row: Int
     let imageName: String
+    let isBlack: Bool
 }
