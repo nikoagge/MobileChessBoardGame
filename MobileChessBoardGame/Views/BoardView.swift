@@ -8,7 +8,7 @@
 import UIKit
 
 class BoardView: UIView {
-    let ratio: CGFloat = 0.8
+    let ratio: CGFloat = 1
     var originX: CGFloat = -31
     var originY: CGFloat = -4
     var cellSide: CGFloat = -13

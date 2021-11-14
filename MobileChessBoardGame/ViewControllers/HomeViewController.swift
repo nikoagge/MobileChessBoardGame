@@ -10,6 +10,8 @@ import AVFoundation
 
 class HomeViewController: UIViewController {
     @IBOutlet weak var boardView: BoardView!
+    @IBOutlet weak var chessPieceTurnInfoLabel: UILabel!
+    @IBOutlet weak var resetButton: UIButton!
     
     var chessEngine = ChessEngine()
     var audioPlayer: AVAudioPlayer!
@@ -21,6 +23,12 @@ class HomeViewController: UIViewController {
         chessEngine.initializeGame()
         boardViewConfiguration()
     }
+    
+    @IBAction func resetButtonTouchUpInside(_ sender: UIButton) {
+        chessEngine.initializeGame()
+        boardView.shadowPieces = chessEngine.pieces
+        boardView.setNeedsDisplay()
+    }
 }
 
 extension HomeViewController: ChessDelegate {
@@ -29,6 +37,8 @@ extension HomeViewController: ChessDelegate {
         boardView.shadowPieces = chessEngine.pieces
         boardView.setNeedsDisplay()
         audioPlayer.play()
+        
+        chessPieceTurnInfoLabel.text = chessEngine.blackTurn ? "Black's turn to move" : "White's turn to move"
     }
     
     func pieceAt(column: Int, row: Int) -> ChessPiece? {
@@ -46,5 +56,6 @@ private extension HomeViewController {
         boardView.shadowPieces = chessEngine.pieces
         boardView.setNeedsDisplay()
         boardView.chessDelegate = self
+        chessPieceTurnInfoLabel.text = "White's turn to move"
     }
 }
