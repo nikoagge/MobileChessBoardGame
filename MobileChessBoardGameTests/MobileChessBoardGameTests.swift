@@ -3,6 +3,7 @@
 //  MobileChessBoardGameTests
 //
 //  Created by Nikos Aggelidis on 7/11/21.
+//  Copyright © 2021 NAPPS. All rights reserved.
 //
 
 import XCTest
