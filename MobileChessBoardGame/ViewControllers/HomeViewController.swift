@@ -52,16 +52,24 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController: ChessDelegate {
     func movePiece(fromColumn: Int, fromRow: Int, toColumn: Int, toRow: Int) {
+        updateMove(fromColumn: fromColumn, fromRow: fromRow, toColumn: toColumn, toRow: toRow)
+        let move = "\(fromColumn):\(fromRow):\(toColumn):\(toRow)"
+        if let moveData = move.data(using: .utf8) {
+            try? session.send(moveData, toPeers: session.connectedPeers, with: .reliable)
+        }
+    }
+    
+    func pieceAt(column: Int, row: Int) -> ChessPiece? {
+        return chessEngine.pieceAt(column: column, row: row)
+    }
+    
+    func updateMove(fromColumn: Int, fromRow: Int, toColumn: Int, toRow: Int) {
         chessEngine.movePiece(fromColumn: fromColumn, fromRow: fromRow, toColumn: toColumn, toRow: toRow)
         boardView.shadowPieces = chessEngine.pieces
         boardView.setNeedsDisplay()
         audioPlayer.play()
         
         chessPieceTurnInfoLabel.text = chessEngine.blackTurn ? "Black's turn to move" : "White's turn to move"
-    }
-    
-    func pieceAt(column: Int, row: Int) -> ChessPiece? {
-        return chessEngine.pieceAt(column: column, row: row)
     }
 }
 
@@ -83,7 +91,15 @@ extension HomeViewController: MCSessionDelegate {
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        debugPrint("Received data: \(peerID.displayName)")
+        if let move = String(data: data, encoding: .utf8) {
+            let moveElements = move.components(separatedBy: ":")
+            debugPrint(moveElements)
+            if let fromColumn = Int(moveElements[0]), let fromRow = Int(moveElements[1]), let toColumn = Int(moveElements[2]), let toRow = Int(moveElements[3]) {
+                DispatchQueue.main.async {
+                    self.updateMove(fromColumn: fromColumn, fromRow: fromRow, toColumn: toColumn, toRow: toRow)
+                }
+            }
+        }
     }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
