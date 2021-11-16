@@ -16,6 +16,7 @@
 		172BB73B27385CBC00A5E3CC /* MobileChessBoardGameUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172BB73A27385CBC00A5E3CC /* MobileChessBoardGameUITests.swift */; };
 		172BB73D27385CBC00A5E3CC /* MobileChessBoardGameUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172BB73C27385CBC00A5E3CC /* MobileChessBoardGameUITestsLaunchTests.swift */; };
 		172BB74B27385D9E00A5E3CC /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172BB74A27385D9E00A5E3CC /* BoardView.swift */; };
+		1750052827438DBA0090478D /* ChessEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1750052727438DBA0090478D /* ChessEngineTests.swift */; };
 		1762D218273D765100534636 /* ChessDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1762D217273D765100534636 /* ChessDelegate.swift */; };
 		176C4C11273C647D00D69A06 /* ChessEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176C4C10273C647D00D69A06 /* ChessEngine.swift */; };
 		176C4C13273C64A100D69A06 /* ChessPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176C4C12273C64A100D69A06 /* ChessPiece.swift */; };
@@ -54,6 +55,7 @@
 		172BB73A27385CBC00A5E3CC /* MobileChessBoardGameUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileChessBoardGameUITests.swift; sourceTree = "<group>"; };
 		172BB73C27385CBC00A5E3CC /* MobileChessBoardGameUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileChessBoardGameUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		172BB74A27385D9E00A5E3CC /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
+		1750052727438DBA0090478D /* ChessEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessEngineTests.swift; sourceTree = "<group>"; };
 		1762D217273D765100534636 /* ChessDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessDelegate.swift; sourceTree = "<group>"; };
 		176C4C10273C647D00D69A06 /* ChessEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessEngine.swift; sourceTree = "<group>"; };
 		176C4C12273C64A100D69A06 /* ChessPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessPiece.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				172BB73027385CBC00A5E3CC /* MobileChessBoardGameTests.swift */,
+				1750052727438DBA0090478D /* ChessEngineTests.swift */,
 			);
 			path = MobileChessBoardGameTests;
 			sourceTree = "<group>";
@@ -329,6 +332,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1750052827438DBA0090478D /* ChessEngineTests.swift in Sources */,
 				172BB73127385CBC00A5E3CC /* MobileChessBoardGameTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -498,9 +502,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7X48R5E6LJ;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MobileChessBoardGame/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -517,6 +522,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.napps.MobileChessBoardGame;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -528,9 +534,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Apple Distribution: Nikolaos Aggelidis (7X48R5E6LJ)";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7X48R5E6LJ;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MobileChessBoardGame/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -547,6 +554,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.napps.MobileChessBoardGame;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = MobileChessBoardGame_AppStore_Distribution;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
