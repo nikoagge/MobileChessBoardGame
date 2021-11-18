@@ -11,7 +11,8 @@ import XCTest
 
 class ChessEngineTests: XCTestCase {
     func testPrintingEmptyGameBoard() {
-        let chessEngine = ChessEngine()
+        var chessEngine = ChessEngine()
+        chessEngine.initializeGame()
         debugPrint(chessEngine)
     }
 }

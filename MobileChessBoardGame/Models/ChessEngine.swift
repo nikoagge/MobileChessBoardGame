@@ -27,7 +27,7 @@ struct ChessEngine {
         }
         
         pieces.remove(candidate)
-        pieces.insert(ChessPiece(column: toColumn, row: toRow, imageName: candidate.imageName, isBlack: candidate.isBlack))
+        pieces.insert(ChessPiece(column: toColumn, row: toRow, imageName: candidate.imageName, isBlack: candidate.isBlack, chessRank: candidate.chessRank))
         blackTurn = !blackTurn
     }
     
@@ -58,22 +58,22 @@ struct ChessEngine {
         blackTurn = false
         pieces.removeAll()
         for row in 0..<2 {
-            pieces.insert(ChessPiece(column: row * 7, row: 0, imageName: "Rook-black", isBlack: true))
-            pieces.insert(ChessPiece(column: row * 7, row: 7, imageName: "Rook-white", isBlack: false))
-            pieces.insert(ChessPiece(column: 1 + row * 5, row: 0, imageName: "Knight-black", isBlack: true))
-            pieces.insert(ChessPiece(column: 1 + row * 5, row: 7, imageName: "Knight-white", isBlack: false))
-            pieces.insert(ChessPiece(column: 2 + row * 3, row: 0, imageName: "Bishop-black", isBlack: true))
-            pieces.insert(ChessPiece(column: 2 + row * 3, row: 7, imageName: "Bishop-white", isBlack: false))
+            pieces.insert(ChessPiece(column: row * 7, row: 0, imageName: "Rook-black", isBlack: true, chessRank: .rook))
+            pieces.insert(ChessPiece(column: row * 7, row: 7, imageName: "Rook-white", isBlack: false, chessRank: .rook))
+            pieces.insert(ChessPiece(column: 1 + row * 5, row: 0, imageName: "Knight-black", isBlack: true, chessRank: .knight))
+            pieces.insert(ChessPiece(column: 1 + row * 5, row: 7, imageName: "Knight-white", isBlack: false, chessRank: .knight))
+            pieces.insert(ChessPiece(column: 2 + row * 3, row: 0, imageName: "Bishop-black", isBlack: true, chessRank: .bishop))
+            pieces.insert(ChessPiece(column: 2 + row * 3, row: 7, imageName: "Bishop-white", isBlack: false, chessRank: .bishop))
         }
         
-        pieces.insert(ChessPiece(column: 3, row: 0, imageName: "Queen-black", isBlack: true))
-        pieces.insert(ChessPiece(column: 3, row: 7, imageName: "Queen-white", isBlack: false))
-        pieces.insert(ChessPiece(column: 4, row: 0, imageName: "King-black", isBlack: true))
-        pieces.insert(ChessPiece(column: 4, row: 7, imageName: "King-white", isBlack: false))
+        pieces.insert(ChessPiece(column: 3, row: 0, imageName: "Queen-black", isBlack: true, chessRank: .queen))
+        pieces.insert(ChessPiece(column: 3, row: 7, imageName: "Queen-white", isBlack: false, chessRank: .queen))
+        pieces.insert(ChessPiece(column: 4, row: 0, imageName: "King-black", isBlack: true, chessRank: .king))
+        pieces.insert(ChessPiece(column: 4, row: 7, imageName: "King-white", isBlack: false, chessRank: .king))
         
         for column in 0..<8 {
-            pieces.insert(ChessPiece(column: column, row: 1, imageName: "Pawn-black", isBlack: true))
-            pieces.insert(ChessPiece(column: column, row: 6, imageName: "Pawn-white", isBlack: false))
+            pieces.insert(ChessPiece(column: column, row: 1, imageName: "Pawn-black", isBlack: true, chessRank: .pawn))
+            pieces.insert(ChessPiece(column: column, row: 6, imageName: "Pawn-white", isBlack: false, chessRank: .pawn))
         }
     }
 }
@@ -86,7 +86,29 @@ extension ChessEngine: CustomStringConvertible {
         for row in 0..<8 {
             description += "\(row)"
             for column in 0..<8 {
-                description += " ."
+                if let chessPiece = pieceAt(column: column, row: row) {
+                    switch chessPiece.chessRank {
+                    case .king:
+                        description += chessPiece.isBlack ? "K" : "k"
+                        
+                    case .queen:
+                        description += chessPiece.isBlack ? "Q" : "q"
+                        
+                    case .pawn:
+                        description += chessPiece.isBlack ? "P" : "p"
+                        
+                    case .bishop:
+                        description += chessPiece.isBlack ? "B" : "b"
+                        
+                    case .knight:
+                        description += chessPiece.isBlack ? "N" : "n"
+                        
+                    case .rook:
+                        description += chessPiece.isBlack ? "R" : "r"
+                    }
+                } else {
+                    description += " ."
+                }
             }
             description += "\n"
         }

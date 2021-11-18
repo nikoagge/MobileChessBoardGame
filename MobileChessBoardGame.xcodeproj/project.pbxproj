@@ -16,6 +16,7 @@
 		172BB73B27385CBC00A5E3CC /* MobileChessBoardGameUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172BB73A27385CBC00A5E3CC /* MobileChessBoardGameUITests.swift */; };
 		172BB73D27385CBC00A5E3CC /* MobileChessBoardGameUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172BB73C27385CBC00A5E3CC /* MobileChessBoardGameUITestsLaunchTests.swift */; };
 		172BB74B27385D9E00A5E3CC /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172BB74A27385D9E00A5E3CC /* BoardView.swift */; };
+		174AE80F2746B72600AEB135 /* ChessRank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174AE80E2746B72600AEB135 /* ChessRank.swift */; };
 		1750052827438DBA0090478D /* ChessEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1750052727438DBA0090478D /* ChessEngineTests.swift */; };
 		1762D218273D765100534636 /* ChessDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1762D217273D765100534636 /* ChessDelegate.swift */; };
 		176C4C11273C647D00D69A06 /* ChessEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176C4C10273C647D00D69A06 /* ChessEngine.swift */; };
@@ -55,6 +56,7 @@
 		172BB73A27385CBC00A5E3CC /* MobileChessBoardGameUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileChessBoardGameUITests.swift; sourceTree = "<group>"; };
 		172BB73C27385CBC00A5E3CC /* MobileChessBoardGameUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileChessBoardGameUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		172BB74A27385D9E00A5E3CC /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
+		174AE80E2746B72600AEB135 /* ChessRank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessRank.swift; sourceTree = "<group>"; };
 		1750052727438DBA0090478D /* ChessEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessEngineTests.swift; sourceTree = "<group>"; };
 		1762D217273D765100534636 /* ChessDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessDelegate.swift; sourceTree = "<group>"; };
 		176C4C10273C647D00D69A06 /* ChessEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessEngine.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 		172BB71827385CBB00A5E3CC /* MobileChessBoardGame */ = {
 			isa = PBXGroup;
 			children = (
+				174AE80D2746B71100AEB135 /* Enums */,
 				17EFC445273FE0600027E8F8 /* Resources */,
 				1762D216273D74BD00534636 /* Protocols */,
 				176C4C14273C672E00D69A06 /* ViewControllers */,
@@ -148,6 +151,14 @@
 				172BB74A27385D9E00A5E3CC /* BoardView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		174AE80D2746B71100AEB135 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				174AE80E2746B72600AEB135 /* ChessRank.swift */,
+			);
+			path = Enums;
 			sourceTree = "<group>";
 		};
 		1762D216273D74BD00534636 /* Protocols */ = {
@@ -321,6 +332,7 @@
 			files = (
 				172BB71E27385CBB00A5E3CC /* HomeViewController.swift in Sources */,
 				172BB74B27385D9E00A5E3CC /* BoardView.swift in Sources */,
+				174AE80F2746B72600AEB135 /* ChessRank.swift in Sources */,
 				1762D218273D765100534636 /* ChessDelegate.swift in Sources */,
 				172BB71A27385CBB00A5E3CC /* AppDelegate.swift in Sources */,
 				176C4C11273C647D00D69A06 /* ChessEngine.swift in Sources */,
