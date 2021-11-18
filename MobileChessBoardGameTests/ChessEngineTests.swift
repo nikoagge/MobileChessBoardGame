@@ -15,4 +15,20 @@ class ChessEngineTests: XCTestCase {
         chessEngine.initializeGame()
         debugPrint(chessEngine)
     }
+    
+    func testChessPieceNotAllowedToGoOutOfBoardView() {
+        var chessEngine = ChessEngine()
+        chessEngine.initializeGame()
+        debugPrint(chessEngine)
+        XCTAssertFalse(chessEngine.canMovePiece(fromColumn: 0, fromRow: 7, toColumn: -1, toRow: 7))
+        XCTAssertFalse(chessEngine.canMovePiece(fromColumn: 0, fromRow: 7, toColumn: 8, toRow: 7))
+        XCTAssertFalse(chessEngine.canMovePiece(fromColumn: 0, fromRow: 7, toColumn: 0, toRow: 8))
+        XCTAssertFalse(chessEngine.canMovePiece(fromColumn: 0, fromRow: 7, toColumn: 0, toRow: -1))
+    }
+    
+    func testAvoidCapturingOwnPieces() {
+        var chessEngine = ChessEngine()
+        chessEngine.initializeGame()
+        XCTAssertFalse(chessEngine.canMovePiece(fromColumn: 0, fromRow: 7, toColumn: 0, toRow: 6))
+    }
 }

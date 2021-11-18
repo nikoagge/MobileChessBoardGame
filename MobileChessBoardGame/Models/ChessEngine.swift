@@ -32,11 +32,19 @@ struct ChessEngine {
     }
     
     func canMovePiece(fromColumn: Int, fromRow: Int, toColumn: Int, toRow: Int) -> Bool {
+        if toColumn < 0 || toColumn > 7 || toRow < 0 || toRow > 7 {
+            return false
+        }
+        
         if fromColumn == toColumn && fromRow == toRow {
             return false
         }
         
         guard let candidate = pieceAt(column: fromColumn, row: fromRow) else { return false }
+        
+        if let target = pieceAt(column: toColumn, row: toRow), target.isBlack == candidate.isBlack {
+            return false
+        }
         
         if candidate.isBlack != blackTurn {
             return false
