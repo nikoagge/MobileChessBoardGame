@@ -31,4 +31,10 @@ class ChessEngineTests: XCTestCase {
         chessEngine.initializeGame()
         XCTAssertFalse(chessEngine.canMovePiece(fromColumn: 0, fromRow: 7, toColumn: 0, toRow: 6))
     }
+    
+    func testKnightRule() {
+        var chessEngine = ChessEngine()
+        chessEngine.pieces.insert(ChessPiece(column: 1, row: 7, imageName: "", isBlack: false, chessRank: .knight))
+        XCTAssertFalse(chessEngine.canMovePiece(fromColumn: 1, fromRow: 7, toColumn: 1, toRow: 5))
+    }
 }

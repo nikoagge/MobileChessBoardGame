@@ -49,7 +49,18 @@ struct ChessEngine {
         if candidate.isBlack != blackTurn {
             return false
         }
-        return true
+        
+        switch candidate.chessRank {
+        case .knight:
+            return canMoveKnight(fromColumn: fromColumn, fromRow: fromRow, toColumn: toColumn, toRow: toRow)
+            
+        default:
+            return true
+        }        
+    }
+    
+    func canMoveKnight(fromColumn: Int, fromRow: Int, toColumn: Int, toRow: Int) -> Bool {
+        return abs(fromColumn - toColumn) == 1 && abs(fromRow - toRow) == 2 || abs(fromRow - toRow) == 1 && abs(fromColumn - toColumn) == 2
     }
     
     func pieceAt(column: Int, row: Int) -> ChessPiece? {
