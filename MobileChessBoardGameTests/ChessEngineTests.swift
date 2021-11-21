@@ -32,9 +32,52 @@ class ChessEngineTests: XCTestCase {
         XCTAssertFalse(chessEngine.canMovePiece(fromColumn: 0, fromRow: 7, toColumn: 0, toRow: 6))
     }
     
-    func testKnightRule() {
+    func testKnightRules() {
         var chessEngine = ChessEngine()
         chessEngine.pieces.insert(ChessPiece(column: 1, row: 7, imageName: "", isBlack: false, chessRank: .knight))
+        
+        /*
+             0 1 2 3 4 5 6 7
+           0 . . . . . . . .
+           1 . . . . . . . .
+           2 . . . . . . . .
+           3 . . . . . . . .
+           4 . . . . . . . .
+           5 . x . . . . . .
+           6 . . . . . . . .
+           7 . n . . . . . .
+    */
+        
         XCTAssertFalse(chessEngine.canMovePiece(fromColumn: 1, fromRow: 7, toColumn: 1, toRow: 5))
+    }
+    
+    func testRookRules() {
+        var chessEngine = ChessEngine()
+        chessEngine.pieces.insert(ChessPiece(column: 0, row: 7, imageName: "", isBlack: false, chessRank: .rook))
+        /*
+             0 1 2 3 4 5 6 7
+           0 . . . . . . . .
+           1 . . . . . . . .
+           2 . . . . . . . .
+           3 . . . . . . . .
+           4 . . . . . . . .
+           5 . . . . . . . .
+           6 . x . . . . . .
+           7 r . . . . . . .
+    */
+        XCTAssertFalse(chessEngine.canMovePiece(fromColumn: 0, fromRow: 7, toColumn: 1, toRow: 6))
+        
+        /*
+             0 1 2 3 4 5 6 7
+           0 . . . . . . . .
+           1 . . . . . . . .
+           2 . . . . . . . .
+           3 . . . . . . . .
+           4 . . . . . . . .
+           5 o . . . . . . .
+           6 . . . . . . . .
+           7 r . . . . . . .
+    */
+        XCTAssertFalse(chessEngine.canMovePiece(fromColumn: 0, fromRow: 7, toColumn: 0, toRow: 5))
     }
 }

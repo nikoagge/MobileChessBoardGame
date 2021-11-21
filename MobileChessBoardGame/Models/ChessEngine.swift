@@ -13,10 +13,6 @@ struct ChessEngine {
     var blackTurn = false
     
     mutating func movePiece(fromColumn: Int, fromRow: Int, toColumn: Int, toRow: Int) {
-        if !canMovePiece(fromColumn: fromColumn, fromRow: fromRow, toColumn: toColumn, toRow: toRow) {
-            return
-        }
-        
         guard let candidate = pieceAt(column: fromColumn, row: fromRow) else { return }
         
         if let target = pieceAt(column: toColumn, row: toRow) {
@@ -54,6 +50,9 @@ struct ChessEngine {
         case .knight:
             return canMoveKnight(fromColumn: fromColumn, fromRow: fromRow, toColumn: toColumn, toRow: toRow)
             
+        case .rook:
+            return canMoveRook(fromColumn: fromColumn, fromRow: fromRow, toColumn: toColumn, toRow: toRow)
+            
         default:
             return true
         }        
@@ -61,6 +60,59 @@ struct ChessEngine {
     
     func canMoveKnight(fromColumn: Int, fromRow: Int, toColumn: Int, toRow: Int) -> Bool {
         return abs(fromColumn - toColumn) == 1 && abs(fromRow - toRow) == 2 || abs(fromRow - toRow) == 1 && abs(fromColumn - toColumn) == 2
+    }
+    
+    func canMoveRook(fromColumn: Int, fromRow: Int, toColumn: Int, toRow: Int) -> Bool {
+        guard emptyBetween(fromColumn: fromColumn, fromRow: fromRow, toColumn: toColumn, toRow: toRow) else { return false }
+        
+        return fromColumn == toColumn || fromRow == toRow
+    }
+    
+    func emptyBetween(fromColumn: Int, fromRow: Int, toColumn: Int, toRow: Int) -> Bool {
+        if fromRow == toRow {
+            let minColumn = min(fromColumn, toColumn)
+            let maxColumn = max(fromColumn, toColumn)
+            if maxColumn - minColumn < 2 {
+                return true
+            }
+            for index in minColumn+1...maxColumn-1 {
+                if pieceAt(column: index, row: fromRow) != nil {
+                    return false
+                }
+            }
+            
+            return true
+        } else if fromColumn == toColumn {
+            let minRow = min(fromRow, toRow)
+            let maxRow = max(fromRow, toRow)
+            if maxRow - minRow < 2 {
+                return true
+            }
+            for index in minRow+1...maxRow-1 {
+                if pieceAt(column: fromColumn, row: index) != nil {
+                    return false
+                }
+            }
+            
+            return true
+        }
+        
+        return false
+    }
+    
+    func emptyBetween(from: Int, to: Int, constant: Int) -> Bool {
+        let minColumn = min(from, to)
+        let maxColumn = max(from, to)
+        if maxColumn - minColumn < 2 {
+            return true
+        }
+        for index in minColumn+1...maxColumn-1 {
+            if pieceAt(column: index, row: constant) != nil {
+                return false
+            }
+        }
+        
+        return true
     }
     
     func pieceAt(column: Int, row: Int) -> ChessPiece? {
