@@ -80,4 +80,38 @@ class ChessEngineTests: XCTestCase {
     */
         XCTAssertFalse(chessEngine.canMovePiece(fromColumn: 0, fromRow: 7, toColumn: 0, toRow: 5))
     }
+    
+    func testBishopRules() {
+        var chessEngine = ChessEngine()
+        chessEngine.pieces.insert(ChessPiece(column: 2, row: 7, imageName: "", isBlack: false, chessRank: .rook))
+        
+        /*
+             0 1 2 3 4 5 6 7
+           0 . . . . . . . .
+           1 . . . . . . . .
+           2 . . . . . . . .
+           3 . . . . . . . .
+           4 . . . . . . . .
+           5 . . . x . . . .
+           6 . . . . . . . .
+           7 . . b . . . . .
+    */
+        
+        XCTAssertFalse(chessEngine.canMovePiece(fromColumn: 2, fromRow: 7, toColumn: 3, toRow: 5))
+        
+        /*
+             0 1 2 3 4 5 6 7
+           0 . . . . . . . .
+           1 . . . . . . . .
+           2 . . . . . . . .
+           3 . . . . . . . .
+           4 . . . . . . . .
+           5 . . . . x . . .
+           6 . . . p . . . .
+           7 . . b . . . . .
+    */
+        
+        chessEngine.pieces.insert(ChessPiece(column: 3, row: 6, imageName: "", isBlack: false, chessRank: .pawn))
+        XCTAssertFalse(chessEngine.canMovePiece(fromColumn: 2, fromRow: 7, toColumn: 4, toRow: 5))
+    }
 }

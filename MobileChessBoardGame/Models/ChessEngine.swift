@@ -53,6 +53,9 @@ struct ChessEngine {
         case .rook:
             return canMoveRook(fromColumn: fromColumn, fromRow: fromRow, toColumn: toColumn, toRow: toRow)
             
+        case .bishop:
+            return canMoveBishop(fromColumn: fromColumn, fromRow: fromRow, toColumn: toColumn, toRow: toRow)
+            
         default:
             return true
         }        
@@ -68,8 +71,14 @@ struct ChessEngine {
         return fromColumn == toColumn || fromRow == toRow
     }
     
+    func canMoveBishop(fromColumn: Int, fromRow: Int, toColumn: Int, toRow: Int) -> Bool {
+        guard emptyBetween(fromColumn: fromColumn, fromRow: fromRow, toColumn: toColumn, toRow: toRow) else { return false }
+        
+        return abs(fromColumn - toColumn) == abs(fromRow - toRow)
+    }
+    
     func emptyBetween(fromColumn: Int, fromRow: Int, toColumn: Int, toRow: Int) -> Bool {
-        if fromRow == toRow {
+        if fromRow == toRow { //horizontal move
             let minColumn = min(fromColumn, toColumn)
             let maxColumn = max(fromColumn, toColumn)
             if maxColumn - minColumn < 2 {
@@ -82,7 +91,7 @@ struct ChessEngine {
             }
             
             return true
-        } else if fromColumn == toColumn {
+        } else if fromColumn == toColumn { //vertical move
             let minRow = min(fromRow, toRow)
             let maxRow = max(fromRow, toRow)
             if maxRow - minRow < 2 {
@@ -95,6 +104,34 @@ struct ChessEngine {
             }
             
             return true
+        } else if abs(fromColumn - toColumn) == abs(fromRow - toRow) { //diagonal move
+            let minColumn = min(fromColumn, toColumn)
+            let maxColumn = max(fromColumn, toColumn)
+            let minRow = min(fromRow, toRow)
+            let maxRow = max(fromRow, toRow)
+            if fromRow - toRow == fromColumn - toColumn { //top left to bottom right
+                if maxColumn - minColumn < 2 {
+                    return true
+                }
+                for index in 1..<abs(fromColumn - toColumn) {
+                    if pieceAt(column: minColumn + index, row: minRow + index) != nil {
+                        return false
+                    }
+                }
+                
+                return true
+            } else { //bottom left to top right
+                if maxColumn - minColumn < 2 {
+                    return true
+                }
+                for index in 1..<abs(fromColumn - toColumn) {
+                    if pieceAt(column: minColumn + index, row: maxRow - index) != nil {
+                        return false
+                    }
+                }
+                
+                return true
+            }
         }
         
         return false
