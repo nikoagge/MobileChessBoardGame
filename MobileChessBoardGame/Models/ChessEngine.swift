@@ -62,6 +62,9 @@ struct ChessEngine {
         case .king:
             return canMoveKing(fromColumn: fromColumn, fromRow: fromRow, toColumn: toColumn, toRow: toRow)
             
+        case .pawn:
+            return canMovePawn(fromColumn: fromColumn, fromRow: fromRow, toColumn: toColumn, toRow: toRow)
+            
         default:
             return true
         }        
@@ -151,6 +154,21 @@ struct ChessEngine {
         let deltaColumn = abs(fromColumn - toColumn)
         let deltaRow = abs(fromRow - toRow)
         return (deltaColumn == 1 || deltaRow == 1) && deltaColumn + deltaRow < 3
+    }
+    
+    func canMovePawn(fromColumn: Int, fromRow: Int, toColumn: Int, toRow: Int) -> Bool {
+        guard let movingPawn = pieceAt(column: fromColumn, row: fromRow) else { return false }
+        if !movingPawn.isBlack {
+            if fromRow == 6 && toColumn == fromColumn {
+                if pieceAt(column: fromColumn, row: 5) == nil {
+                    return toRow == 5 || toRow == 4 && pieceAt(column: fromColumn, row: 4) == nil
+                }
+            }
+            
+            return false
+        } else {
+            return true
+        }        
     }
     
     func emptyBetween(from: Int, to: Int, constant: Int) -> Bool {

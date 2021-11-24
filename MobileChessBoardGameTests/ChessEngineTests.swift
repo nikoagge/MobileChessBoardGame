@@ -237,4 +237,69 @@ class ChessEngineTests: XCTestCase {
         XCTAssertTrue(chessEngine.canMovePiece(fromColumn: 3, fromRow: 3, toColumn: 4, toRow: 3))
         XCTAssertFalse(chessEngine.canMovePiece(fromColumn: 3, fromRow: 3, toColumn: 4, toRow: 1))
     }
+    
+    func testPawnRules() {
+        /*
+             0 1 2 3 4 5 6 7
+           0 . . . . . . . .
+           1 . . . . . . . .
+           2 . . . . . . . .
+           3 . . . . . . . .
+           4 . . . . . o . .
+           5 . . . . x o x .
+           6 . . . . x p x .
+           7 . . . . . . . .
+    */
+        var chessEngine = ChessEngine()
+        chessEngine.pieces.insert(ChessPiece(column: 5, row: 6, imageName: "", isBlack: false, chessRank: .pawn))
+        XCTAssertFalse(chessEngine.canMovePiece(fromColumn: 5, fromRow: 6, toColumn: 6, toRow: 5))
+        XCTAssertTrue(chessEngine.canMovePiece(fromColumn: 5, fromRow: 6, toColumn: 5, toRow: 5))
+        XCTAssertTrue(chessEngine.canMovePiece(fromColumn: 5, fromRow: 6, toColumn: 5, toRow: 4))
+        
+        /*
+             0 1 2 3 4 5 6 7
+           0 . . . . . . . .
+           1 . . . . . . . .
+           2 . . . . . . . .
+           3 . . . . . . . .
+           4 . . . . . x . .
+           5 . . . . . N . .
+           6 . . . . . p . .
+           7 . . . . . . . .
+    */
+        chessEngine = ChessEngine()
+        chessEngine.pieces.insert(ChessPiece(column: 5, row: 6, imageName: "", isBlack: false, chessRank: .pawn))
+        chessEngine.pieces.insert(ChessPiece(column: 5, row: 5, imageName: "", isBlack: true, chessRank: .knight))
+        XCTAssertFalse(chessEngine.canMovePiece(fromColumn: 5, fromRow: 6, toColumn: 5, toRow: 5))
+        XCTAssertFalse(chessEngine.canMovePiece(fromColumn: 5, fromRow: 6, toColumn: 5, toRow: 4))
+
+        /*
+             0 1 2 3 4 5 6 7
+           0 . . . . . . . .
+           1 . . . . . . . .
+           2 . . . . . . . .
+           3 . . . . . . . .
+           4 . . . . . N . .
+           5 . . . . . . . .
+           6 . . . . . p . .
+           7 . . . . . . . .
+    */
+        chessEngine = ChessEngine()
+        chessEngine.pieces.insert(ChessPiece(column: 5, row: 6, imageName: "", isBlack: false, chessRank: .pawn))
+        chessEngine.pieces.insert(ChessPiece(column: 5, row: 4, imageName: "", isBlack: false, chessRank: .knight))
+        XCTAssertTrue(chessEngine.canMovePiece(fromColumn: 5, fromRow: 6, toColumn: 5, toRow: 5))
+        XCTAssertFalse(chessEngine.canMovePiece(fromColumn: 5, fromRow: 6, toColumn: 5, toRow: 4))
+        
+        /*
+             0 1 2 3 4 5 6 7
+           0 . . . . . . . .
+           1 p . . . . . . .
+           2 ? . . . . . . .
+           3 . . . . . . . .
+           4 . . . . . ? . .
+           5 . . . . . ? ? .
+           6 . . . . . p . .
+           7 . . . . . . . .
+    */
+    }
 }
