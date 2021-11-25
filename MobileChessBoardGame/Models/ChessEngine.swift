@@ -158,21 +158,11 @@ struct ChessEngine {
     
     func canMovePawn(fromColumn: Int, fromRow: Int, toColumn: Int, toRow: Int) -> Bool {
         guard let movingPawn = pieceAt(column: fromColumn, row: fromRow) else { return false }
-        if !movingPawn.isBlack {
-            if let piece = pieceAt(column: toColumn, row: toRow), piece.isBlack {
-                return toRow == fromRow - 1 && abs(toColumn - fromColumn) == 1
-            } else if toColumn == fromColumn {
-                if pieceAt(column: fromColumn, row: fromRow - 1) == nil  {
-                    return toRow == fromRow - 1 || toRow == fromRow - 2 && pieceAt(column: fromColumn, row: fromRow) == nil
-                }
-            }
-        } else {
-            if let piece = pieceAt(column: toColumn, row: toRow), !piece.isBlack {
-                return toRow == fromRow + 1 && abs(toColumn - fromColumn) == 1
-            } else if toColumn == fromColumn {
-                if pieceAt(column: fromColumn, row: fromRow + 1) == nil  {
-                    return toRow == fromRow + 1 || toRow == fromRow + 2 && pieceAt(column: fromColumn, row: fromRow) == nil
-                }
+        if let target = pieceAt(column: toColumn, row: toRow), !target.isBlack {
+            return toRow == fromRow + (movingPawn.isBlack ?  1 : -1) && abs(toColumn - fromColumn) == 1
+        } else if toColumn == fromColumn {
+            if pieceAt(column: fromColumn, row: fromRow + (movingPawn.isBlack ? 1 : -1)) == nil  {
+                return toRow == fromRow + (movingPawn.isBlack ? 1 : -1) || toRow == fromRow + (movingPawn.isBlack ? 2 : -2) && pieceAt(column: fromColumn, row: fromRow) == nil
             }
         }
         
