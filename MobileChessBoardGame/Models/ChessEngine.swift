@@ -159,22 +159,36 @@ struct ChessEngine {
     func canMovePawn(fromColumn: Int, fromRow: Int, toColumn: Int, toRow: Int) -> Bool {
         guard let movingPawn = pieceAt(column: fromColumn, row: fromRow) else { return false }
         if !movingPawn.isBlack {
-            if fromRow == 6 {
-                if pieceAt(column: fromColumn, row: 5) == nil && toColumn == fromColumn {
-                    return toRow == 5 || toRow == 4 && pieceAt(column: fromColumn, row: 4) == nil
-                }
-            } else if fromRow < 6 {
-                if fromColumn == toColumn && toRow == fromRow - 1 {
-                    return pieceAt(column: fromColumn, row: fromRow) == nil
-                } else if let piece = pieceAt(column: toColumn, row: toRow), piece.isBlack {
-                    return toRow == fromRow - 1 && abs(toColumn - fromColumn) == 1
+            if let piece = pieceAt(column: toColumn, row: toRow), piece.isBlack {
+                return toRow == fromRow - 1 && abs(toColumn - fromColumn) == 1
+            } else {
+                if fromRow == 6 {
+                    if pieceAt(column: fromColumn, row: 5) == nil && toColumn == fromColumn {
+                        return toRow == 5 || toRow == 4 && pieceAt(column: fromColumn, row: 4) == nil
+                    }
+                } else if fromRow < 6 {
+                    if fromColumn == toColumn && toRow == fromRow - 1 {
+                        return pieceAt(column: fromColumn, row: fromRow) == nil
+                    }
                 }
             }
-            
-            return false
         } else {
-            return true
-        }        
+            if let piece = pieceAt(column: toColumn, row: toRow), !piece.isBlack {
+                return toRow == fromRow + 1 && abs(toColumn - fromColumn) == 1
+            } else {
+                if fromRow == 1 {
+                    if pieceAt(column: fromColumn, row: 2) == nil && toColumn == fromColumn {
+                        return toRow == 2 || toRow == 3 && pieceAt(column: fromColumn, row: 3) == nil
+                    }
+                } else if fromRow > 1 {
+                    if fromColumn == toColumn && toRow == fromRow + 1 {
+                        return pieceAt(column: fromColumn, row: fromRow) == nil
+                    }
+                }
+            }
+        }
+        
+        return false
     }
     
     func emptyBetween(from: Int, to: Int, constant: Int) -> Bool {
