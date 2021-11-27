@@ -11,6 +11,7 @@ import Foundation
 struct ChessEngine {
     var pieces: Set<ChessPiece> = Set<ChessPiece>()
     var blackTurn = false
+    var lastChessPieceMove: ChessPieceMove?
     
     mutating func movePiece(fromColumn: Int, fromRow: Int, toColumn: Int, toRow: Int) {
         guard let candidate = pieceAt(column: fromColumn, row: fromRow) else { return }
@@ -23,7 +24,9 @@ struct ChessEngine {
         }
         
         pieces.remove(candidate)
-        pieces.insert(ChessPiece(column: toColumn, row: toRow, imageName: candidate.imageName, isBlack: candidate.isBlack, chessRank: candidate.chessRank))
+        let movedChessPiece = ChessPiece(column: toColumn, row: toRow, imageName: candidate.imageName, isBlack: candidate.isBlack, chessRank: candidate.chessRank)
+        pieces.insert(movedChessPiece)
+        lastChessPieceMove = ChessPieceMove(fromColumn: fromColumn, fromRow: fromRow, toColumn: toColumn, toRow: toRow)
         blackTurn = !blackTurn
     }
     
@@ -163,6 +166,14 @@ struct ChessEngine {
         } else if toColumn == fromColumn {
             if pieceAt(column: fromColumn, row: fromRow + (movingPawn.isBlack ? 1 : -1)) == nil  {
                 return toRow == fromRow + (movingPawn.isBlack ? 1 : -1) || toRow == fromRow + (movingPawn.isBlack ? 2 : -2) && pieceAt(column: fromColumn, row: fromRow) == nil
+            }
+        }
+        
+        if !movingPawn.isBlack {
+            if let lastChessPieceMove = lastChessPieceMove, let enemyPawn = pieceAt(column: lastChessPieceMove.toColumn, row: lastChessPieceMove.toRow), lastChessPieceMove.fromRow == 1 {
+                if fromRow == 3 && toRow == 2 && abs(toColumn - fromColumn) == 1  {
+                    return enemyPawn.chessRank == .pawn && !enemyPawn.isBlack != !movingPawn.isBlack && enemyPawn.row == fromRow && enemyPawn.column == toColumn
+                }
             }
         }
         

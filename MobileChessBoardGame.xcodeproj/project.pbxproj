@@ -19,6 +19,7 @@
 		174AE80F2746B72600AEB135 /* ChessRank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174AE80E2746B72600AEB135 /* ChessRank.swift */; };
 		1750052827438DBA0090478D /* ChessEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1750052727438DBA0090478D /* ChessEngineTests.swift */; };
 		1762D218273D765100534636 /* ChessDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1762D217273D765100534636 /* ChessDelegate.swift */; };
+		17696268275202150091CC7D /* ChessPieceMove.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17696267275202150091CC7D /* ChessPieceMove.swift */; };
 		176C4C11273C647D00D69A06 /* ChessEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176C4C10273C647D00D69A06 /* ChessEngine.swift */; };
 		176C4C13273C64A100D69A06 /* ChessPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176C4C12273C64A100D69A06 /* ChessPiece.swift */; };
 		17EFC447273FE07B0027E8F8 /* chess-move.wav in Resources */ = {isa = PBXBuildFile; fileRef = 17EFC446273FE07A0027E8F8 /* chess-move.wav */; };
@@ -59,6 +60,7 @@
 		174AE80E2746B72600AEB135 /* ChessRank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessRank.swift; sourceTree = "<group>"; };
 		1750052727438DBA0090478D /* ChessEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessEngineTests.swift; sourceTree = "<group>"; };
 		1762D217273D765100534636 /* ChessDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessDelegate.swift; sourceTree = "<group>"; };
+		17696267275202150091CC7D /* ChessPieceMove.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessPieceMove.swift; sourceTree = "<group>"; };
 		176C4C10273C647D00D69A06 /* ChessEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessEngine.swift; sourceTree = "<group>"; };
 		176C4C12273C64A100D69A06 /* ChessPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessPiece.swift; sourceTree = "<group>"; };
 		17EFC446273FE07A0027E8F8 /* chess-move.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "chess-move.wav"; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 			children = (
 				176C4C10273C647D00D69A06 /* ChessEngine.swift */,
 				176C4C12273C64A100D69A06 /* ChessPiece.swift */,
+				17696267275202150091CC7D /* ChessPieceMove.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -337,6 +340,7 @@
 				172BB71A27385CBB00A5E3CC /* AppDelegate.swift in Sources */,
 				176C4C11273C647D00D69A06 /* ChessEngine.swift in Sources */,
 				176C4C13273C64A100D69A06 /* ChessPiece.swift in Sources */,
+				17696268275202150091CC7D /* ChessPieceMove.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
