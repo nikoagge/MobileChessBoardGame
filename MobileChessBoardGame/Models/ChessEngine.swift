@@ -26,6 +26,9 @@ struct ChessEngine {
         pieces.remove(candidate)
         let movedChessPiece = ChessPiece(column: toColumn, row: toRow, imageName: candidate.imageName, isBlack: candidate.isBlack, chessRank: candidate.chessRank)
         pieces.insert(movedChessPiece)
+        if let lastChessPieceMove = lastChessPieceMove, let lastMovedPawn = pieceAt(column: lastChessPieceMove.toColumn, row: lastChessPieceMove.toRow), !lastMovedPawn.isBlack != !candidate.isBlack, candidate.chessRank == .pawn, lastMovedPawn.chessRank == .pawn, abs(fromColumn - toColumn) == 1 && abs(fromRow - toRow) == 1 {
+            pieces.remove(lastMovedPawn)
+        }
         lastChessPieceMove = ChessPieceMove(fromColumn: fromColumn, fromRow: fromRow, toColumn: toColumn, toRow: toRow)
         blackTurn = !blackTurn
     }
