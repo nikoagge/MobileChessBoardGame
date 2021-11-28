@@ -633,4 +633,42 @@ class ChessEngineTests: XCTestCase {
         XCTAssertNil(chessEngine.pieceAt(column: 6, row: 4))
         XCTAssertNotNil(chessEngine.pieceAt(column: 6, row: 5))
     }
+    
+    func testThreat() {
+        /*
+             0 1 2 3 4 5 6 7
+           0 R N B Q K B N R
+           1 P P P . P P P P
+           2 . . . P . . . .
+           3 . . . . . p . .
+           4 . . . . . . . .
+           5 . . . . . . . .
+           6 p p p p p . p p
+           7 r n b q k b n r
+    */
+        var chessEngine = ChessEngine()
+        chessEngine.initializeGame()
+        chessEngine.movePiece(fromColumn: 5, fromRow: 6, toColumn: 5, toRow: 4)
+        chessEngine.movePiece(fromColumn: 3, fromRow: 1, toColumn: 3, toRow: 2)
+        chessEngine.movePiece(fromColumn: 5, fromRow: 4, toColumn: 5, toRow: 3)
+        XCTAssertTrue(chessEngine.underThreatAt(column: 5, row: 3))
+        
+        /*
+             0 1 2 3 4 5 6 7
+           0 R . B Q K B N R
+           1 P P P P P P P P
+           2 N . . . . . . .
+           3 . . . . . p . .
+           4 . . . . . . . .
+           5 . . . . . . . .
+           6 p p p p p . p p
+           7 r n b q k b n r
+    */
+        chessEngine = ChessEngine()
+        chessEngine.initializeGame()
+        chessEngine.movePiece(fromColumn: 5, fromRow: 6, toColumn: 5, toRow: 4)
+        chessEngine.movePiece(fromColumn: 1, fromRow: 0, toColumn: 0, toRow: 2)
+        chessEngine.movePiece(fromColumn: 5, fromRow: 4, toColumn: 5, toRow: 3)
+        XCTAssertFalse(chessEngine.underThreatAt(column: 5, row: 3))
+    }
 }

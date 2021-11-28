@@ -33,6 +33,16 @@ struct ChessEngine {
         blackTurn = !blackTurn
     }
     
+    func underThreatAt(column: Int, row: Int) -> Bool {
+        for piece in pieces where !piece.isBlack == !blackTurn {
+            if canMovePiece(fromColumn: piece.column, fromRow: piece.row, toColumn: column, toRow: row) {
+                return true
+            }
+        }
+        
+        return false
+    }
+    
     func canMovePiece(fromColumn: Int, fromRow: Int, toColumn: Int, toRow: Int) -> Bool {
         if toColumn < 0 || toColumn > 7 || toRow < 0 || toRow > 7 {
             return false
