@@ -327,6 +327,21 @@ class ChessEngineTests: XCTestCase {
         chessEngine.pieces.insert(ChessPiece(column: 5, row: 4, imageName: "", isBlack: false, chessRank: .pawn))
         chessEngine.pieces.insert(ChessPiece(column: 5, row: 3, imageName: "", isBlack: false, chessRank: .knight))
         XCTAssertFalse(chessEngine.canMovePiece(fromColumn: 5, fromRow: 4, toColumn: 5, toRow: 3))
+        
+        /*
+             0 1 2 3 4 5 6 7
+           0 . . . . . . . .
+           1 . . . . . . . .
+           2 . . . . . x . .
+           3 . . . . . . . .
+           4 . . . . . p . .
+           5 . . . . . . . .
+           6 . . . . . . . .
+           7 . . . . . . . .
+    */
+        chessEngine = ChessEngine()
+        chessEngine.pieces.insert(ChessPiece(column: 5, row: 4, imageName: "", isBlack: false, chessRank: .pawn))
+        XCTAssertFalse(chessEngine.canMovePiece(fromColumn: 5, fromRow: 4, toColumn: 5, toRow: 2))
 
         /*
              0 1 2 3 4 5 6 7

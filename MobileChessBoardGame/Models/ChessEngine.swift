@@ -168,7 +168,7 @@ struct ChessEngine {
             return toRow == fromRow + (movingPawn.isBlack ?  1 : -1) && abs(toColumn - fromColumn) == 1
         } else if toColumn == fromColumn {
             if pieceAt(column: fromColumn, row: fromRow + (movingPawn.isBlack ? 1 : -1)) == nil  {
-                return toRow == fromRow + (movingPawn.isBlack ? 1 : -1) || toRow == fromRow + (movingPawn.isBlack ? 2 : -2) && pieceAt(column: fromColumn, row: fromRow) == nil
+                return toRow == fromRow + (movingPawn.isBlack ? 1 : -1) || toRow == fromRow + (movingPawn.isBlack ? 2 : -2) && pieceAt(column: fromColumn, row: fromRow) == nil && fromRow == (!movingPawn.isBlack ? 6 : 1)
             }
         }
         
