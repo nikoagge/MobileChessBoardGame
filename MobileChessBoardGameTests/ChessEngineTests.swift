@@ -608,4 +608,29 @@ class ChessEngineTests: XCTestCase {
         XCTAssertNotNil(chessEngine.pieceAt(column: 0, row: 2))
         XCTAssertNotNil(chessEngine.pieceAt(column: 5, row: 3))
     }
+    
+    func testBlackEnPassant() {
+        /*
+             0 1 2 3 4 5 6 7
+           0 . . . . . . . .
+           1 . . . . . . . .
+           2 . . . . . . . .
+           3 . . . . . . . .
+           4 . . . . . P p .
+           5 . . . . . . o .
+           6 . . . . . . . .
+           7 . . . . . . . .
+    */
+        var chessEngine = ChessEngine()
+        chessEngine.pieces.insert(ChessPiece(column: 5, row: 4, imageName: "", isBlack: true, chessRank: .pawn))
+        chessEngine.pieces.insert(ChessPiece(column: 6, row: 4, imageName: "", isBlack: false, chessRank: .pawn))
+        chessEngine.lastChessPieceMove = ChessPieceMove(fromColumn: 6, fromRow: 6, toColumn: 6, toRow: 4)
+        chessEngine.blackTurn = true
+        XCTAssertTrue(chessEngine.canMovePiece(fromColumn: 5, fromRow: 4, toColumn: 6, toRow: 5))
+        
+        XCTAssertNotNil(chessEngine.pieceAt(column: 6, row: 4))
+        chessEngine.movePiece(fromColumn: 5, fromRow: 4, toColumn: 6, toRow: 5)
+        XCTAssertNil(chessEngine.pieceAt(column: 6, row: 4))
+        XCTAssertNotNil(chessEngine.pieceAt(column: 6, row: 5))
+    }
 }

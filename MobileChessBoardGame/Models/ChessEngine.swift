@@ -170,13 +170,11 @@ struct ChessEngine {
             if pieceAt(column: fromColumn, row: fromRow + (movingPawn.isBlack ? 1 : -1)) == nil  {
                 return toRow == fromRow + (movingPawn.isBlack ? 1 : -1) || toRow == fromRow + (movingPawn.isBlack ? 2 : -2) && pieceAt(column: fromColumn, row: fromRow) == nil && fromRow == (!movingPawn.isBlack ? 6 : 1)
             }
-        }
-        
-        if !movingPawn.isBlack {
-            if let lastChessPieceMove = lastChessPieceMove, let enemyPawn = pieceAt(column: lastChessPieceMove.toColumn, row: lastChessPieceMove.toRow), lastChessPieceMove.fromRow == 1 {
-                if fromRow == 3 && toRow == 2 && abs(toColumn - fromColumn) == 1  {
-                    return enemyPawn.chessRank == .pawn && !enemyPawn.isBlack != !movingPawn.isBlack && enemyPawn.row == fromRow && enemyPawn.column == toColumn
-                }
+        } else if let lastChessPieceMove = lastChessPieceMove, let enemyPawn = pieceAt(column: lastChessPieceMove.toColumn, row: lastChessPieceMove.toRow), enemyPawn.chessRank == .pawn && !enemyPawn.isBlack != !movingPawn.isBlack && enemyPawn.row == fromRow && enemyPawn.column == toColumn, abs(toColumn - fromColumn) == 1 {
+            if !movingPawn.isBlack {
+                return fromRow == 3 && toRow == 2 && lastChessPieceMove.fromRow == 1
+            } else {
+                return fromRow == 4 && toRow == 5 && lastChessPieceMove.fromRow == 6
             }
         }
         
