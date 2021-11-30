@@ -319,6 +319,7 @@ class ChessEngineTests: XCTestCase {
            7 r n b q k . . r
     */
         chessEngine.movePiece(fromColumn: 2, fromRow: 1, toColumn: 2, toRow: 2)
+        XCTAssertTrue(chessEngine.canCastle(fromColumn: 4, fromRow: 7, toColumn: 6, toRow: 7))
         
         /*
              0 1 2 3 4 5 6 7
@@ -753,7 +754,7 @@ class ChessEngineTests: XCTestCase {
         chessEngine.movePiece(fromColumn: 5, fromRow: 6, toColumn: 5, toRow: 4)
         chessEngine.movePiece(fromColumn: 3, fromRow: 1, toColumn: 3, toRow: 2)
         chessEngine.movePiece(fromColumn: 5, fromRow: 4, toColumn: 5, toRow: 3)
-        XCTAssertTrue(chessEngine.underThreatAt(column: 5, row: 3))
+        XCTAssertTrue(chessEngine.underThreatAt(column: 5, row: 3, fromWhite: false))
         
         /*
              0 1 2 3 4 5 6 7
@@ -771,6 +772,6 @@ class ChessEngineTests: XCTestCase {
         chessEngine.movePiece(fromColumn: 5, fromRow: 6, toColumn: 5, toRow: 4)
         chessEngine.movePiece(fromColumn: 1, fromRow: 0, toColumn: 0, toRow: 2)
         chessEngine.movePiece(fromColumn: 5, fromRow: 4, toColumn: 5, toRow: 3)
-        XCTAssertFalse(chessEngine.underThreatAt(column: 5, row: 3))
+        XCTAssertFalse(chessEngine.underThreatAt(column: 5, row: 3, fromWhite: false))
     }
 }

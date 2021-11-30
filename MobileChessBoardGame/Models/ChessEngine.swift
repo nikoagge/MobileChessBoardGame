@@ -12,6 +12,8 @@ struct ChessEngine {
     var pieces: Set<ChessPiece> = Set<ChessPiece>()
     var blackTurn = false
     var lastChessPieceMove: ChessPieceMove?
+    var whiteKingSideRookMoved = false
+    var whiteKingMoved = false
     
     mutating func movePiece(fromColumn: Int, fromRow: Int, toColumn: Int, toRow: Int) {
         guard let candidate = pieceAt(column: fromColumn, row: fromRow) else { return }
@@ -33,8 +35,8 @@ struct ChessEngine {
         blackTurn = !blackTurn
     }
     
-    func underThreatAt(column: Int, row: Int) -> Bool {
-        for piece in pieces where !piece.isBlack == !blackTurn {
+    func underThreatAt(column: Int, row: Int, fromWhite: Bool) -> Bool {
+        for piece in pieces where !piece.isBlack == fromWhite {
             if canMovePiece(fromColumn: piece.column, fromRow: piece.row, toColumn: column, toRow: row) {
                 return true
             }
@@ -170,6 +172,17 @@ struct ChessEngine {
         let deltaColumn = abs(fromColumn - toColumn)
         let deltaRow = abs(fromRow - toRow)
         return (deltaColumn == 1 || deltaRow == 1) && deltaColumn + deltaRow < 3
+    }
+    
+    func canCastle(fromColumn: Int, fromRow: Int, toColumn: Int, toRow: Int) -> Bool {
+        guard let movingKing = pieceAt(column: fromColumn, row: fromRow) else { return false }
+        if !movingKing.isBlack {
+            if !whiteKingSideRookMoved && !whiteKingMoved && pieceAt(column: 5, row: fromRow) == nil && pieceAt(column: 6, row: fromRow) == nil {
+                return !underThreatAt(column: 5, row: fromRow, fromWhite: blackTurn) && !underThreatAt(column: 6, row: fromRow, fromWhite: blackTurn)
+            }
+        }
+        
+        return false
     }
     
     func canMovePawn(fromColumn: Int, fromRow: Int, toColumn: Int, toRow: Int) -> Bool {
