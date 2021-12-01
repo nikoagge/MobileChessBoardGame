@@ -28,6 +28,22 @@ struct ChessEngine {
         pieces.remove(candidate)
         let movedChessPiece = ChessPiece(column: toColumn, row: toRow, imageName: candidate.imageName, isBlack: candidate.isBlack, chessRank: candidate.chessRank)
         pieces.insert(movedChessPiece)
+        
+        if fromColumn == 4 && fromRow == 7 {
+            whiteKingMoved = true
+        }
+        
+        if fromColumn == 7 && fromRow == 7 {
+            whiteKingSideRookMoved = true
+        }
+        
+        if fromColumn == 4 && fromRow == 7 && toColumn == 6 && toRow == 7 {
+            if let rook = pieceAt(column: 7, row: 7) {
+                pieces.remove(rook)
+                pieces.insert(ChessPiece(column: 5, row: 7, imageName: rook.imageName, isBlack: rook.isBlack, chessRank: rook.chessRank))
+            }
+        }
+        
         if let lastChessPieceMove = lastChessPieceMove, let lastMovedPawn = pieceAt(column: lastChessPieceMove.toColumn, row: lastChessPieceMove.toRow), !lastMovedPawn.isBlack != !candidate.isBlack, candidate.chessRank == .pawn, lastMovedPawn.chessRank == .pawn, abs(fromColumn - toColumn) == 1 && abs(fromRow - toRow) == 1 {
             pieces.remove(lastMovedPawn)
         }
@@ -169,6 +185,9 @@ struct ChessEngine {
     }
     
     func canMoveKing(fromColumn: Int, fromRow: Int, toColumn: Int, toRow: Int) -> Bool {
+        if canCastle(fromColumn: fromColumn, fromRow: fromRow, toColumn: toColumn, toRow: toRow) {
+            return true
+        }
         let deltaColumn = abs(fromColumn - toColumn)
         let deltaRow = abs(fromRow - toRow)
         return (deltaColumn == 1 || deltaRow == 1) && deltaColumn + deltaRow < 3
@@ -178,7 +197,7 @@ struct ChessEngine {
         guard let movingKing = pieceAt(column: fromColumn, row: fromRow) else { return false }
         if !movingKing.isBlack {
             if !whiteKingSideRookMoved && !whiteKingMoved && pieceAt(column: 5, row: fromRow) == nil && pieceAt(column: 6, row: fromRow) == nil {
-                return !underThreatAt(column: 5, row: fromRow, fromWhite: blackTurn) && !underThreatAt(column: 6, row: fromRow, fromWhite: blackTurn)
+                return movingKing.column == 4 && movingKing.row == 7 && !underThreatAt(column: 5, row: fromRow, fromWhite: blackTurn) && !underThreatAt(column: 6, row: fromRow, fromWhite: blackTurn)
             }
         }
         
