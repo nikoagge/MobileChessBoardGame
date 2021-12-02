@@ -319,7 +319,7 @@ class ChessEngineTests: XCTestCase {
            7 r n b q k . . r
     */
         chessEngine.movePiece(fromColumn: 2, fromRow: 1, toColumn: 2, toRow: 2)
-        XCTAssertTrue(chessEngine.canCastle(fromColumn: 4, fromRow: 7, toColumn: 6, toRow: 7))
+        XCTAssertTrue(chessEngine.canCastle(toColumn: 6, toRow: 7))
         
         /*
              0 1 2 3 4 5 6 7
@@ -337,7 +337,7 @@ class ChessEngineTests: XCTestCase {
         chessEngine.movePiece(fromColumn: 3, fromRow: 1, toColumn: 3, toRow: 2)
         chessEngine.movePiece(fromColumn: 5, fromRow: 7, toColumn: 4, toRow: 7)
         chessEngine.movePiece(fromColumn: 4, fromRow: 1, toColumn: 4, toRow: 2)
-        XCTAssertFalse(chessEngine.canCastle(fromColumn: 4, fromRow: 7, toColumn: 6, toRow: 7))
+        XCTAssertFalse(chessEngine.canCastle(toColumn: 6, toRow: 7))
         
         /*
              0 1 2 3 4 5 6 7
@@ -440,7 +440,7 @@ class ChessEngineTests: XCTestCase {
            7 r n b q k . . r
     */
         chessEngine.movePiece(fromColumn: 2, fromRow: 1, toColumn: 2, toRow: 2)
-        XCTAssertTrue(chessEngine.canCastle(fromColumn: 4, fromRow: 7, toColumn: 6, toRow: 7))
+        XCTAssertTrue(chessEngine.canCastle(toColumn: 6, toRow: 7))
         
         /*
              0 1 2 3 4 5 6 7
@@ -458,7 +458,7 @@ class ChessEngineTests: XCTestCase {
         chessEngine.movePiece(fromColumn: 3, fromRow: 1, toColumn: 3, toRow: 2)
         chessEngine.movePiece(fromColumn: 5, fromRow: 7, toColumn: 4, toRow: 7)
         chessEngine.movePiece(fromColumn: 4, fromRow: 1, toColumn: 4, toRow: 2)
-        XCTAssertFalse(chessEngine.canCastle(fromColumn: 4, fromRow: 7, toColumn: 6, toRow: 7))
+        XCTAssertFalse(chessEngine.canCastle(toColumn: 6, toRow: 7))
         
         /*
              0 1 2 3 4 5 6 7
@@ -478,6 +478,152 @@ class ChessEngineTests: XCTestCase {
 //        XCTAssertNotNil(chessEngine.pieceAt(column: 6, row: 7))
 //        XCTAssertNil(chessEngine.pieceAt(column: 7, row: 7))
 //        XCTAssertNotNil(chessEngine.pieceAt(column: 6, row: 7))
+    }
+
+    func testBlackKingSideCastlingRules() {
+        /*
+             0 1 2 3 4 5 6 7
+           0 R N B Q K B N R
+           1 P P P P . P P P
+           2 . . . . P . . .
+           3 . . . . . . . .
+           4 . . . . . . . .
+           5 . . . . . . . .
+           6 p p p p p p p p
+           7 r n b q k b n r
+    */
+        
+        var chessEngine = ChessEngine()
+        chessEngine.initializeGame()
+        chessEngine.movePiece(fromColumn: 4, fromRow: 1, toColumn: 4, toRow: 2)
+        
+        /*
+             0 1 2 3 4 5 6 7
+           0 R N B Q K B N R
+           1 . P P P P P P P
+           2 P . . . . . . .
+           3 . . . . . . . .
+           4 . . . . . . . .
+           5 . . . . p . . .
+           6 p p p p . p p p
+           7 r n b q k b n r
+    */
+        chessEngine.movePiece(fromColumn: 4, fromRow: 6, toColumn: 4, toRow: 5)
+        
+        /*
+             0 1 2 3 4 5 6 7
+           0 R N B Q K B N R
+           1 P P P P . P P P
+           2 . . . . P . . .
+           3 . . . . . . . .
+           4 . . . . . . . .
+           5 . . . . . . . .
+           6 p p p p p p p p
+           7 r n b q k b n r
+    */
+        chessEngine.movePiece(fromColumn: 4, fromRow: 1, toColumn: 4, toRow: 2)
+        
+        /*
+             0 1 2 3 4 5 6 7
+           0 R N B Q K B N R
+           1 P P P P . P P P
+           2 . . . . P . . .
+           3 . . . . . . . .
+           4 . . . . . . . .
+           5 . . . . p p . .
+           6 p p p p . . p p
+           7 r n b q k b n r
+    */
+        chessEngine.movePiece(fromColumn: 5, fromRow: 6, toColumn: 5, toRow: 5)
+
+        /*
+             0 1 2 3 4 5 6 7
+           0 R N B Q K . N R
+           1 P P P P B P P P
+           2 . . . . P . . .
+           3 . . . . . . . .
+           4 . . . . . . . .
+           5 . . . . p p . .
+           6 p p p p . . p p
+           7 r n b q k b n r
+    */
+        chessEngine.movePiece(fromColumn: 5, fromRow: 0, toColumn: 4, toRow: 1)
+        
+        /*
+             0 1 2 3 4 5 6 7
+           0 R N B Q K . N R
+           1 P P P P B P P P
+           2 . . . . P . . .
+           3 . . . . . . . .
+           4 . . . . . . . .
+           5 . . . . p p p .
+           6 p p p p . . . p
+           7 r n b q k b n r
+    */
+        chessEngine.movePiece(fromColumn: 6, fromRow: 6, toColumn: 6, toRow: 5)
+        
+        /*
+             0 1 2 3 4 5 6 7
+           0 R N B Q K . . R
+           1 P P P P B P P P
+           2 . . . . P . . N
+           3 . . . . . . . .
+           4 . . . . . . . .
+           5 . . . . p p p .
+           6 p p p p . . . p
+           7 r n b q k b n r
+    */
+        chessEngine.movePiece(fromColumn: 6, fromRow: 0, toColumn: 7, toRow: 2)
+        /*
+             0 1 2 3 4 5 6 7
+           0 R N B Q K . . R
+           1 P P P P B P P P
+           2 . . . . P . . N
+           3 . . . . . . . .
+           4 . . . . . . . .
+           5 . . . . p p p p
+           6 p p p p . . . .
+           7 r n b q k b n r
+    */
+        
+        chessEngine.movePiece(fromColumn: 7, fromRow: 6, toColumn: 7, toRow: 5)
+        XCTAssertTrue(chessEngine.canCastle(toColumn: 6, toRow: 0))
+        
+        /*
+             0 1 2 3 4 5 6 7
+           0 R N B Q K . . R
+           1 P P P P B P P P
+           2 . . . . P . . N
+           3 . . . . . . . .
+           4 . . . . . . . .
+           5 . . p p p p p p
+           6 p p . . . . . .
+           7 r n b q k b n r
+    */
+        chessEngine.movePiece(fromColumn: 4, fromRow: 0, toColumn: 5, toRow: 0)
+        chessEngine.movePiece(fromColumn: 3, fromRow: 6, toColumn: 3, toRow: 5)
+        chessEngine.movePiece(fromColumn: 5, fromRow: 0, toColumn: 4, toRow: 0)
+        chessEngine.movePiece(fromColumn: 2, fromRow: 6, toColumn: 2, toRow: 5)
+        XCTAssertFalse(chessEngine.canCastle(toColumn: 6, toRow: 0))
+        
+        /*
+             0 1 2 3 4 5 6 7
+           0 R N B Q . R K .
+           1 P P P P B P P P
+           2 . . . . P . . N
+           3 . . . . . . . .
+           4 . . . . . . . .
+           5 . . . . p p p p
+           6 p p p p . . . .
+           7 r n b q k b n r
+    */
+        XCTAssertNotNil(chessEngine.pieceAt(column: 7, row: 0))
+        XCTAssertNil(chessEngine.pieceAt(column: 6, row: 0))
+        XCTAssertNil(chessEngine.pieceAt(column: 5, row: 0))
+        chessEngine.movePiece(fromColumn: 4, fromRow: 0, toColumn: 6, toRow: 0)
+        XCTAssertNotNil(chessEngine.pieceAt(column: 6, row: 0))
+        XCTAssertNil(chessEngine.pieceAt(column: 7, row: 0))
+        XCTAssertNotNil(chessEngine.pieceAt(column: 5, row: 0))
     }
 
     
