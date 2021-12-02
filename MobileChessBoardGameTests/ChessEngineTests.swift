@@ -475,9 +475,43 @@ class ChessEngineTests: XCTestCase {
         XCTAssertNil(chessEngine.pieceAt(column: 6, row: 7))
         XCTAssertNil(chessEngine.pieceAt(column: 5, row: 7))
         chessEngine.movePiece(fromColumn: 4, fromRow: 7, toColumn: 6, toRow: 7)
-//        XCTAssertNotNil(chessEngine.pieceAt(column: 6, row: 7))
-//        XCTAssertNil(chessEngine.pieceAt(column: 7, row: 7))
-//        XCTAssertNotNil(chessEngine.pieceAt(column: 6, row: 7))
+        XCTAssertNotNil(chessEngine.pieceAt(column: 6, row: 7))
+        XCTAssertNil(chessEngine.pieceAt(column: 7, row: 7))
+        XCTAssertNotNil(chessEngine.pieceAt(column: 6, row: 7))
+        
+        /*
+             0 1 2 3 4 5 6 7
+           0 R N B Q K B N R
+           1 . . . . . . P P
+           2 P P P P P P . .
+           3 . . . . . . . .
+           4 . . . . . . . .
+           5 . . . p . n p b
+           6 p p p k p p . p
+           7 r n b . q . . r
+    */
+        chessEngine = ChessEngine()
+        chessEngine.initializeGame()
+        chessEngine.movePiece(fromColumn: 3, fromRow: 6, toColumn: 3, toRow: 5)
+        chessEngine.movePiece(fromColumn: 0, fromRow: 1, toColumn: 0, toRow: 2)
+        chessEngine.movePiece(fromColumn: 4, fromRow: 7, toColumn: 3, toRow: 6)
+        chessEngine.movePiece(fromColumn: 1, fromRow: 1, toColumn: 1, toRow: 2)
+        chessEngine.movePiece(fromColumn: 6, fromRow: 7, toColumn: 5, toRow: 5)
+        chessEngine.movePiece(fromColumn: 2, fromRow: 1, toColumn: 2, toRow: 2)
+        chessEngine.movePiece(fromColumn: 6, fromRow: 6, toColumn: 6, toRow: 5)
+        chessEngine.movePiece(fromColumn: 3, fromRow: 1, toColumn: 3, toRow: 2)
+        chessEngine.movePiece(fromColumn: 5, fromRow: 7, toColumn: 7, toRow: 5)
+        chessEngine.movePiece(fromColumn: 4, fromRow: 1, toColumn: 4, toRow: 2)
+        chessEngine.movePiece(fromColumn: 3, fromRow: 7, toColumn: 4, toRow: 7)
+        chessEngine.movePiece(fromColumn: 5, fromRow: 1, toColumn: 5, toRow: 2)
+        XCTAssertFalse(chessEngine.canCastle(toColumn: 6, toRow: 7))
+        XCTAssertNotNil(chessEngine.pieceAt(column: 7, row: 7))
+        XCTAssertNil(chessEngine.pieceAt(column: 6, row: 7))
+        XCTAssertNil(chessEngine.pieceAt(column: 5, row: 7))
+        chessEngine.movePiece(fromColumn: 4, fromRow: 7, toColumn: 6, toRow: 7)
+        XCTAssertNotNil(chessEngine.pieceAt(column: 6, row: 7))
+        XCTAssertNotNil(chessEngine.pieceAt(column: 7, row: 7))
+        XCTAssertNil(chessEngine.pieceAt(column: 6, row: 7))
     }
 
     func testBlackKingSideCastlingRules() {

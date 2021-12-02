@@ -47,15 +47,13 @@ struct ChessEngine {
             blackKingSideRookMoved = true
         }
         
-        if fromColumn == 4 && fromRow == 7 && toColumn == 6 && toRow == 7 {
-            if let rook = pieceAt(column: 7, row: 7) {
-                pieces.remove(rook)
-                pieces.insert(ChessPiece(column: 5, row: 7, imageName: rook.imageName, isBlack: rook.isBlack, chessRank: rook.chessRank))
-            }
-        } else if fromColumn == 4 && fromRow == 0 && toColumn == 6 && toRow == 0 {
-            if let rook = pieceAt(column: 7, row: 0) {
-                pieces.remove(rook)
-                pieces.insert(ChessPiece(column: 5, row: 0, imageName: rook.imageName, isBlack: rook.isBlack, chessRank: rook.chessRank))
+        if candidate.chessRank == .king && fromColumn == 4 {
+            if toColumn == 6 {
+                let row = !candidate.isBlack ? 7 : 0
+                if let rook = pieceAt(column: 7, row: row) {
+                    pieces.remove(rook)
+                    pieces.insert(ChessPiece(column: 5, row: row, imageName: rook.imageName, isBlack: rook.isBlack, chessRank: rook.chessRank))
+                }
             }
         }
         
@@ -199,7 +197,7 @@ struct ChessEngine {
         return canMoveRook(fromColumn: fromColumn, fromRow: fromRow, toColumn: toColumn, toRow: toRow) || canMoveBishop(fromColumn: fromColumn, fromRow: fromRow, toColumn: toColumn, toRow: toRow)
     }
     
-    func canMoveKing(toColumn: Int, toRow: Int) -> Bool {
+    func canMoveKing(fromColumn: Int, fromRow: Int, toColumn: Int, toRow: Int) -> Bool {
         if canCastle(toColumn: toColumn, toRow: toRow) {
             return true
         }
@@ -209,16 +207,11 @@ struct ChessEngine {
     }
     
     func canCastle(toColumn: Int, toRow: Int) -> Bool {
-        if toRow == 7 {
-            guard let movingKing = pieceAt(column: 4, row: 7) else { return false }
-            if !whiteKingSideRookMoved && !whiteKingMoved && pieceAt(column: 5, row: 7) == nil && pieceAt(column: 6, row: 7) == nil {
-                return movingKing.column == 4 && movingKing.row == 7 && !underThreatAt(column: 5, row: 7, fromWhite: blackTurn) && !underThreatAt(column: 6, row: 7, fromWhite: blackTurn)
-            }
-        } else {
-            guard let movingKing = pieceAt(column: 4, row: 0 ) else { return false }
-            if !blackKingSideRookMoved && !blackKingMoved && pieceAt(column: 5, row: 0) == nil && pieceAt(column: 6, row: 0) == nil {
-                return movingKing.column == 4 && movingKing.row == 0 && !underThreatAt(column: 5, row: 0, fromWhite: blackTurn) && !underThreatAt(column: 6, row: 0, fromWhite: blackTurn)
-            }
+        let row = !blackTurn ? 7 : 0
+        guard let movingKing = pieceAt(column: 4, row: toRow) else { return false }
+        
+        if pieceAt(column: 6, row: row) == nil && movingKing.column == 4 && movingKing.row == row && !underThreatAt(column: 5, row: row, fromWhite: blackTurn) && !underThreatAt(column: 6, row: row, fromWhite: blackTurn) {
+            return !blackTurn ? !(whiteKingSideRookMoved || whiteKingMoved) : !(blackKingSideRookMoved || blackKingMoved)
         }
         
         return false
