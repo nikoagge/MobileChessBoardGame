@@ -451,4 +451,79 @@ class KingTests: XCTestCase {
         XCTAssertNil(chessEngine.pieceAt(column: 7, row: 0))
         XCTAssertNotNil(chessEngine.pieceAt(column: 5, row: 0))
     }
+    
+    func testKingThreatenedByPawn() {
+        /*
+             0 1 2 3 4 5 6 7
+           0 R N B Q K B N R
+           1 P P P P P P P P
+           2 . . . . . . . .
+           3 . . . . . . . .
+           4 . . . . . . . .
+           5 . . . . . . . .
+           6 p p p p p p p p
+           7 r n b q k b n r
+    */
+        
+        var chessEngine = ChessEngine()
+        chessEngine.initializeGame()
+        
+        /*
+             0 1 2 3 4 5 6 7
+           0 R N B Q K B N R
+           1 P P P P P P P P
+           2 . . . . . . . .
+           3 . . . . . . . .
+           4 . . . . p . . .
+           5 . . . . . . . .
+           6 p p p p . p p p
+           7 r n b q k b n r
+    */
+        
+        chessEngine.movePiece(fromColumn: 4, fromRow: 6, toColumn: 4, toRow: 4)
+        
+        /*
+             0 1 2 3 4 5 6 7
+           0 R N B Q K B N R
+           1 P P P P P . P P
+           2 . . . . . . . .
+           3 . . . . . P . .
+           4 . . . . p . . .
+           5 . . . . . . . .
+           6 p p p p . p p p
+           7 r n b q k b n r
+    */
+        
+        chessEngine.movePiece(fromColumn: 5, fromRow: 1, toColumn: 5, toRow: 3)
+        
+        /*
+             0 1 2 3 4 5 6 7
+           0 R N B Q K B N R
+           1 P P P P P . P P
+           2 . . . . . . . .
+           3 . . . . . P . .
+           4 . . . . p . . .
+           5 . . . . . . . .
+           6 p p p p k p p p
+           7 r n b q . b n r
+    */
+        
+        chessEngine.movePiece(fromColumn: 4, fromRow: 7, toColumn: 4, toRow: 6)
+        
+        /*
+             0 1 2 3 4 5 6 7
+           0 R N B Q K B N R
+           1 P P P P P . P P
+           2 . . . . . . . .
+           3 . . . . . . . .
+           4 . . . . p P . .
+           5 . . . . . . . .
+           6 p p p p k p p p
+           7 r n b q . b n r
+    */
+        
+        chessEngine.movePiece(fromColumn: 5, fromRow: 3, toColumn: 5, toRow: 4)
+        XCTAssertFalse(chessEngine.canMovePiece(fromColumn: 4, fromRow: 6, toColumn: 4, toRow: 5, isWhite: true))
+        
+    }
 }
