@@ -384,7 +384,30 @@ class ChessEngineTests: XCTestCase {
         chessEngine.movePiece(fromColumn: 3, fromRow: 1, toColumn: 3, toRow: 2)
         chessEngine.movePiece(fromColumn: 2, fromRow: 7, toColumn: 3, toRow: 6)
         chessEngine.movePiece(fromColumn: 4, fromRow: 1, toColumn: 4, toRow: 2)
-        XCTAssertTrue(chessEngine.canCastle(toColumn: 1, toRow: 7))
+        XCTAssertTrue(chessEngine.canCastle(toColumn: 2, toRow: 7))
+        
+        /*
+             0 1 2 3 4 5 6 7
+           0 R N B Q K B N R
+           1 . . . . . P P P
+           2 P P P P P . . .
+           3 . . . . . . . .
+           4 . . p . . . . .
+           5 n q . p . . . .
+           6 p p . b p p p p
+           7 r . . . k b n r
+    */
+        XCTAssertNil(chessEngine.pieceAt(column: 1, row: 7))
+        XCTAssertNil(chessEngine.pieceAt(column:2, row: 7))
+        XCTAssertNil(chessEngine.pieceAt(column: 3, row: 7))
+        XCTAssertNotNil(chessEngine.pieceAt(column: 0, row: 7))
+        XCTAssertNotNil(chessEngine.pieceAt(column: 4, row: 7))
+        chessEngine.movePiece(fromColumn: 4, fromRow: 7, toColumn: 2, toRow: 7)
+        XCTAssertNil(chessEngine.pieceAt(column: 1, row: 7))
+        XCTAssertNotNil(chessEngine.pieceAt(column: 2, row: 7))
+        XCTAssertNotNil(chessEngine.pieceAt(column: 3, row: 7))
+        XCTAssertNil(chessEngine.pieceAt(column: 0, row: 7))
+        XCTAssertNil(chessEngine.pieceAt(column: 4, row: 7))
     }
     
     func testWhiteKingSideCastlingRules() {

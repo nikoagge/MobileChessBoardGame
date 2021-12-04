@@ -58,11 +58,16 @@ struct ChessEngine {
         }
         
         if candidate.chessRank == .king && fromColumn == 4 {
+            let row = !candidate.isBlack ? 7 : 0
             if toColumn == 6 {
-                let row = !candidate.isBlack ? 7 : 0
                 if let rook = pieceAt(column: 7, row: row) {
                     pieces.remove(rook)
                     pieces.insert(ChessPiece(column: 5, row: row, imageName: rook.imageName, isBlack: rook.isBlack, chessRank: rook.chessRank))
+                }
+            } else if toColumn == 2 {
+                if let rook = pieceAt(column: 0, row: row) {
+                    pieces.remove(rook)
+                    pieces.insert(ChessPiece(column: 3, row: row, imageName: rook.imageName, isBlack: rook.isBlack, chessRank: rook.chessRank))
                 }
             }
         }
@@ -217,13 +222,13 @@ struct ChessEngine {
     }
     
     func canCastle(toColumn: Int, toRow: Int) -> Bool {
-        guard let piece = pieceAt(column: 4, row: toRow), piece.chessRank == .king, !piece.isBlack == !blackTurn else { return false }
+        guard let piece = pieceAt(column: 4, row: toRow), piece.chessRank == .king, !piece.isBlack == !blackTurn, toRow == (!piece.isBlack ? 7 : 0) else { return false }
         
         let row = !blackTurn ? 7 : 0
         let kingSide = toColumn == 6
         let columns = kingSide ? 5...6 : 1...3
         
-        guard emptyAndSafe(row: row, columns: columns) else { return false }
+        guard emptyAndSafe(row: row, columns: columns), toColumn == (kingSide ? 6 : 2) else { return false }
         
         if !piece.isBlack && !whiteKingMoved {
             return kingSide ? !whiteKingSideRookMoved : !whiteQueenSideRookMoved
