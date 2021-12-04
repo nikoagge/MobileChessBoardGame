@@ -224,7 +224,7 @@ struct ChessEngine {
         let kingSide = toColumn == 6
         let columns = kingSide ? 5...6 : 1...3
         
-        guard emptyAndSafe(row: row, columns: columns, whiteEnemy: true), toColumn == (kingSide ? 6 : 2) else { return false }
+        guard emptyAndSafe(row: row, columns: columns, whiteEnemy: blackTurn), toColumn == (kingSide ? 6 : 2) else { return false }
         
         if !piece.isBlack && !whiteKingMoved {
             return kingSide ? !whiteKingSideRookMoved : !whiteQueenSideRookMoved
