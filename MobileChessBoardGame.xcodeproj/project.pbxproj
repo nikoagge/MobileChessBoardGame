@@ -22,6 +22,12 @@
 		17696268275202150091CC7D /* ChessPieceMove.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17696267275202150091CC7D /* ChessPieceMove.swift */; };
 		176C4C11273C647D00D69A06 /* ChessEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176C4C10273C647D00D69A06 /* ChessEngine.swift */; };
 		176C4C13273C64A100D69A06 /* ChessPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176C4C12273C64A100D69A06 /* ChessPiece.swift */; };
+		17DC4659275B848500B01533 /* RookTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DC4658275B848500B01533 /* RookTests.swift */; };
+		17DC465B275B858200B01533 /* KnightTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DC465A275B858200B01533 /* KnightTests.swift */; };
+		17DC465D275B861800B01533 /* BishopTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DC465C275B861800B01533 /* BishopTests.swift */; };
+		17DC465F275B879E00B01533 /* QueenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DC465E275B879E00B01533 /* QueenTests.swift */; };
+		17DC4661275B88EE00B01533 /* KingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DC4660275B88EE00B01533 /* KingTests.swift */; };
+		17DC4663275B8A7D00B01533 /* PawnTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DC4662275B8A7D00B01533 /* PawnTests.swift */; };
 		17EFC447273FE07B0027E8F8 /* chess-move.wav in Resources */ = {isa = PBXBuildFile; fileRef = 17EFC446273FE07A0027E8F8 /* chess-move.wav */; };
 		17EFC44927413ED50027E8F8 /* InfoPlistValues.strings in Resources */ = {isa = PBXBuildFile; fileRef = 17EFC44827413ED50027E8F8 /* InfoPlistValues.strings */; };
 /* End PBXBuildFile section */
@@ -63,6 +69,12 @@
 		17696267275202150091CC7D /* ChessPieceMove.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessPieceMove.swift; sourceTree = "<group>"; };
 		176C4C10273C647D00D69A06 /* ChessEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessEngine.swift; sourceTree = "<group>"; };
 		176C4C12273C64A100D69A06 /* ChessPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessPiece.swift; sourceTree = "<group>"; };
+		17DC4658275B848500B01533 /* RookTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RookTests.swift; sourceTree = "<group>"; };
+		17DC465A275B858200B01533 /* KnightTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnightTests.swift; sourceTree = "<group>"; };
+		17DC465C275B861800B01533 /* BishopTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BishopTests.swift; sourceTree = "<group>"; };
+		17DC465E275B879E00B01533 /* QueenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueenTests.swift; sourceTree = "<group>"; };
+		17DC4660275B88EE00B01533 /* KingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KingTests.swift; sourceTree = "<group>"; };
+		17DC4662275B8A7D00B01533 /* PawnTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PawnTests.swift; sourceTree = "<group>"; };
 		17EFC446273FE07A0027E8F8 /* chess-move.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "chess-move.wav"; sourceTree = "<group>"; };
 		17EFC44827413ED50027E8F8 /* InfoPlistValues.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = InfoPlistValues.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -133,6 +145,12 @@
 			children = (
 				172BB73027385CBC00A5E3CC /* MobileChessBoardGameTests.swift */,
 				1750052727438DBA0090478D /* ChessEngineTests.swift */,
+				17DC4658275B848500B01533 /* RookTests.swift */,
+				17DC465A275B858200B01533 /* KnightTests.swift */,
+				17DC465C275B861800B01533 /* BishopTests.swift */,
+				17DC465E275B879E00B01533 /* QueenTests.swift */,
+				17DC4660275B88EE00B01533 /* KingTests.swift */,
+				17DC4662275B8A7D00B01533 /* PawnTests.swift */,
 			);
 			path = MobileChessBoardGameTests;
 			sourceTree = "<group>";
@@ -348,8 +366,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17DC465B275B858200B01533 /* KnightTests.swift in Sources */,
 				1750052827438DBA0090478D /* ChessEngineTests.swift in Sources */,
+				17DC465F275B879E00B01533 /* QueenTests.swift in Sources */,
+				17DC4663275B8A7D00B01533 /* PawnTests.swift in Sources */,
+				17DC465D275B861800B01533 /* BishopTests.swift in Sources */,
+				17DC4659275B848500B01533 /* RookTests.swift in Sources */,
 				172BB73127385CBC00A5E3CC /* MobileChessBoardGameTests.swift in Sources */,
+				17DC4661275B88EE00B01533 /* KingTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
