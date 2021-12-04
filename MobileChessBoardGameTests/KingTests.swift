@@ -24,10 +24,10 @@ class KingTests: XCTestCase {
     */
         var chessEngine = ChessEngine()
         chessEngine.pieces.insert(ChessPiece(column: 3, row: 3, imageName: "", isBlack: false, chessRank: .king))
-        XCTAssertFalse(chessEngine.canMovePiece(fromColumn: 3, fromRow: 3, toColumn: 3, toRow: 3, isWhite: false))
-        XCTAssertFalse(chessEngine.canMovePiece(fromColumn: 3, fromRow: 3, toColumn: 5, toRow: 3, isWhite: false))
-        XCTAssertTrue(chessEngine.canMovePiece(fromColumn: 3, fromRow: 3, toColumn: 4, toRow: 3, isWhite: false))
-        XCTAssertFalse(chessEngine.canMovePiece(fromColumn: 3, fromRow: 3, toColumn: 4, toRow: 1, isWhite: false))
+        XCTAssertFalse(chessEngine.canPieceMove(fromColumn: 3, fromRow: 3, toColumn: 3, toRow: 3, isWhite: false))
+        XCTAssertFalse(chessEngine.canPieceMove(fromColumn: 3, fromRow: 3, toColumn: 5, toRow: 3, isWhite: false))
+        XCTAssertTrue(chessEngine.canPieceMove(fromColumn: 3, fromRow: 3, toColumn: 4, toRow: 3, isWhite: false))
+        XCTAssertFalse(chessEngine.canPieceMove(fromColumn: 3, fromRow: 3, toColumn: 4, toRow: 1, isWhite: false))
     }
     
     func testWhiteKingSideCanCastleRules() {
@@ -523,7 +523,7 @@ class KingTests: XCTestCase {
     */
         
         chessEngine.movePiece(fromColumn: 5, fromRow: 3, toColumn: 5, toRow: 4)
-        XCTAssertFalse(chessEngine.canMovePiece(fromColumn: 4, fromRow: 6, toColumn: 4, toRow: 5, isWhite: true))
-        
+        XCTAssertFalse(chessEngine.canPieceMove(fromColumn: 4, fromRow: 6, toColumn: 4, toRow: 5, isWhite: true))
+        XCTAssertTrue(chessEngine.canPieceMove(fromColumn: 4, fromRow: 6, toColumn: 5, toRow: 5, isWhite: true))
     }
 }

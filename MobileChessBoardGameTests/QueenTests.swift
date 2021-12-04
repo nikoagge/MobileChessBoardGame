@@ -24,7 +24,7 @@ class QueenTests: XCTestCase {
            6 . . . . . . . .
            7 . . . x . . . .
     */
-        XCTAssertFalse(chessEngine.canMovePiece(fromColumn: 3, fromRow: 7, toColumn: 5, toRow: 5, isWhite: true))
+        XCTAssertFalse(chessEngine.canPieceMove(fromColumn: 3, fromRow: 7, toColumn: 5, toRow: 5, isWhite: true))
         
         chessEngine.pieces.insert(ChessPiece(column: 3, row: 7, imageName: "", isBlack: false, chessRank: .queen))
         
@@ -39,7 +39,7 @@ class QueenTests: XCTestCase {
            6 . . . . . . . .
            7 . . . q . . . .
     */
-        XCTAssertTrue(chessEngine.canMovePiece(fromColumn: 3, fromRow: 7, toColumn: 5, toRow: 5, isWhite: true))
+        XCTAssertTrue(chessEngine.canPieceMove(fromColumn: 3, fromRow: 7, toColumn: 5, toRow: 5, isWhite: true))
         
         /*
              0 1 2 3 4 5 6 7
@@ -52,7 +52,7 @@ class QueenTests: XCTestCase {
            6 . . . . . . . .
            7 . . . q . . . .
     */
-        XCTAssertFalse(chessEngine.canMovePiece(fromColumn: 3, fromRow: 7, toColumn: 4, toRow: 5, isWhite: true))
+        XCTAssertFalse(chessEngine.canPieceMove(fromColumn: 3, fromRow: 7, toColumn: 4, toRow: 5, isWhite: true))
         
         /*
              0 1 2 3 4 5 6 7
@@ -71,10 +71,10 @@ class QueenTests: XCTestCase {
         chessEngine.pieces.insert(ChessPiece(column: 4, row: 2, imageName: "", isBlack: false, chessRank: .knight))
         chessEngine.pieces.insert(ChessPiece(column: 6, row: 26, imageName: "", isBlack: false, chessRank: .knight))
         chessEngine.pieces.insert(ChessPiece(column: 1, row: 5, imageName: "", isBlack: false, chessRank: .knight))
-        XCTAssertFalse(chessEngine.canMovePiece(fromColumn: 3, fromRow: 3, toColumn: 0, toRow: 0, isWhite: false))
-        XCTAssertFalse(chessEngine.canMovePiece(fromColumn: 3, fromRow: 3, toColumn: 6, toRow: 0, isWhite: false))
-        XCTAssertFalse(chessEngine.canMovePiece(fromColumn: 3, fromRow: 3, toColumn: 7, toRow: 7, isWhite: false))
-        XCTAssertFalse(chessEngine.canMovePiece(fromColumn: 3, fromRow: 3, toColumn: 0, toRow: 6, isWhite: false))
+        XCTAssertFalse(chessEngine.canPieceMove(fromColumn: 3, fromRow: 3, toColumn: 0, toRow: 0, isWhite: false))
+        XCTAssertFalse(chessEngine.canPieceMove(fromColumn: 3, fromRow: 3, toColumn: 6, toRow: 0, isWhite: false))
+        XCTAssertFalse(chessEngine.canPieceMove(fromColumn: 3, fromRow: 3, toColumn: 7, toRow: 7, isWhite: false))
+        XCTAssertFalse(chessEngine.canPieceMove(fromColumn: 3, fromRow: 3, toColumn: 0, toRow: 6, isWhite: false))
     }
     
     func testWhiteQueenSideCastlingRules() {

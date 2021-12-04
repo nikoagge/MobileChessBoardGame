@@ -20,16 +20,16 @@ class ChessEngineTests: XCTestCase {
         var chessEngine = ChessEngine()
         chessEngine.initializeGame()
         debugPrint(chessEngine)
-        XCTAssertFalse(chessEngine.canMovePiece(fromColumn: 0, fromRow: 7, toColumn: -1, toRow: 7, isWhite: false))
-        XCTAssertFalse(chessEngine.canMovePiece(fromColumn: 0, fromRow: 7, toColumn: 8, toRow: 7, isWhite: false))
-        XCTAssertFalse(chessEngine.canMovePiece(fromColumn: 0, fromRow: 7, toColumn: 0, toRow: 8, isWhite: false))
-        XCTAssertFalse(chessEngine.canMovePiece(fromColumn: 0, fromRow: 7, toColumn: 0, toRow: -1, isWhite: false))
+        XCTAssertFalse(chessEngine.canPieceMove(fromColumn: 0, fromRow: 7, toColumn: -1, toRow: 7, isWhite: false))
+        XCTAssertFalse(chessEngine.canPieceMove(fromColumn: 0, fromRow: 7, toColumn: 8, toRow: 7, isWhite: false))
+        XCTAssertFalse(chessEngine.canPieceMove(fromColumn: 0, fromRow: 7, toColumn: 0, toRow: 8, isWhite: false))
+        XCTAssertFalse(chessEngine.canPieceMove(fromColumn: 0, fromRow: 7, toColumn: 0, toRow: -1, isWhite: false))
     }
     
     func testAvoidCapturingOwnPieces() {
         var chessEngine = ChessEngine()
         chessEngine.initializeGame()
-        XCTAssertFalse(chessEngine.canMovePiece(fromColumn: 0, fromRow: 7, toColumn: 0, toRow: 6, isWhite: true))
+        XCTAssertFalse(chessEngine.canPieceMove(fromColumn: 0, fromRow: 7, toColumn: 0, toRow: 6, isWhite: true))
     }
     
     func testWhiteEnPassant() {
@@ -48,7 +48,7 @@ class ChessEngineTests: XCTestCase {
         chessEngine.pieces.insert(ChessPiece(column: 5, row: 3, imageName: "", isBlack: false, chessRank: .pawn))
         chessEngine.pieces.insert(ChessPiece(column: 4, row: 3, imageName: "", isBlack: true, chessRank: .pawn))
         chessEngine.lastChessPieceMove = ChessPieceMove(fromColumn: 4, fromRow: 1, toColumn: 4, toRow: 3)
-        XCTAssertTrue(chessEngine.canMovePiece(fromColumn: 5, fromRow: 3, toColumn: 4, toRow: 2, isWhite: false))
+        XCTAssertTrue(chessEngine.canPieceMove(fromColumn: 5, fromRow: 3, toColumn: 4, toRow: 2, isWhite: false))
         
         XCTAssertNotNil(chessEngine.pieceAt(column: 4, row: 3))
         chessEngine.movePiece(fromColumn: 5, fromRow: 3, toColumn: 4, toRow: 2)
@@ -184,7 +184,7 @@ class ChessEngineTests: XCTestCase {
         chessEngine.pieces.insert(ChessPiece(column: 6, row: 4, imageName: "", isBlack: false, chessRank: .pawn))
         chessEngine.lastChessPieceMove = ChessPieceMove(fromColumn: 6, fromRow: 6, toColumn: 6, toRow: 4)
         chessEngine.blackTurn = true
-        XCTAssertTrue(chessEngine.canMovePiece(fromColumn: 5, fromRow: 4, toColumn: 6, toRow: 5, isWhite: true))
+        XCTAssertTrue(chessEngine.canPieceMove(fromColumn: 5, fromRow: 4, toColumn: 6, toRow: 5, isWhite: true))
         
         XCTAssertNotNil(chessEngine.pieceAt(column: 6, row: 4))
         chessEngine.movePiece(fromColumn: 5, fromRow: 4, toColumn: 6, toRow: 5)

@@ -26,7 +26,7 @@ class BishopTests: XCTestCase {
            7 . . b . . . . .
     */
         
-        XCTAssertFalse(chessEngine.canMovePiece(fromColumn: 2, fromRow: 7, toColumn: 3, toRow: 5, isWhite: true))
+        XCTAssertFalse(chessEngine.canPieceMove(fromColumn: 2, fromRow: 7, toColumn: 3, toRow: 5, isWhite: true))
         
         /*
              0 1 2 3 4 5 6 7
@@ -41,7 +41,7 @@ class BishopTests: XCTestCase {
     */
         
         chessEngine.pieces.insert(ChessPiece(column: 3, row: 6, imageName: "", isBlack: false, chessRank: .pawn))
-        XCTAssertFalse(chessEngine.canMovePiece(fromColumn: 2, fromRow: 7, toColumn: 4, toRow: 5, isWhite: true))
+        XCTAssertFalse(chessEngine.canPieceMove(fromColumn: 2, fromRow: 7, toColumn: 4, toRow: 5, isWhite: true))
         
         /*
              0 1 2 3 4 5 6 7
@@ -54,7 +54,7 @@ class BishopTests: XCTestCase {
            6 . . . p . . . .
            7 . . b . . . . .
     */
-        XCTAssertFalse(chessEngine.canMovePiece(fromColumn: 2, fromRow: 7, toColumn: 7, toRow: 2, isWhite: true))
+        XCTAssertFalse(chessEngine.canPieceMove(fromColumn: 2, fromRow: 7, toColumn: 7, toRow: 2, isWhite: true))
         
         chessEngine = ChessEngine()
         chessEngine.pieces.insert(ChessPiece(column: 3, row: 3, imageName: "", isBlack: false, chessRank: .bishop))
@@ -74,10 +74,10 @@ class BishopTests: XCTestCase {
         chessEngine.pieces.insert(ChessPiece(column: 4, row: 2, imageName: "", isBlack: false, chessRank: .knight))
         chessEngine.pieces.insert(ChessPiece(column: 6, row: 6, imageName: "", isBlack: false, chessRank: .knight))
         chessEngine.pieces.insert(ChessPiece(column: 1, row: 5, imageName: "", isBlack: false, chessRank: .knight))
-        XCTAssertFalse(chessEngine.canMovePiece(fromColumn: 3, fromRow: 3, toColumn: 0, toRow: 0, isWhite: false))
-        XCTAssertFalse(chessEngine.canMovePiece(fromColumn: 3, fromRow: 3, toColumn: 6, toRow: 0, isWhite: false))
-        XCTAssertFalse(chessEngine.canMovePiece(fromColumn: 3, fromRow: 3, toColumn: 7, toRow: 7, isWhite: false))
-        XCTAssertFalse(chessEngine.canMovePiece(fromColumn: 3, fromRow: 3, toColumn: 0, toRow: 6, isWhite: false))
+        XCTAssertFalse(chessEngine.canPieceMove(fromColumn: 3, fromRow: 3, toColumn: 0, toRow: 0, isWhite: false))
+        XCTAssertFalse(chessEngine.canPieceMove(fromColumn: 3, fromRow: 3, toColumn: 6, toRow: 0, isWhite: false))
+        XCTAssertFalse(chessEngine.canPieceMove(fromColumn: 3, fromRow: 3, toColumn: 7, toRow: 7, isWhite: false))
+        XCTAssertFalse(chessEngine.canPieceMove(fromColumn: 3, fromRow: 3, toColumn: 0, toRow: 6, isWhite: false))
     }
 
 }

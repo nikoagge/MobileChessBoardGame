@@ -38,6 +38,6 @@ class KnightTests: XCTestCase {
            7 . n . . . . . .
     */
         
-        XCTAssertFalse(chessEngine.canMovePiece(fromColumn: 1, fromRow: 7, toColumn: 1, toRow: 5, isWhite: true))
+        XCTAssertFalse(chessEngine.canPieceMove(fromColumn: 1, fromRow: 7, toColumn: 1, toRow: 5, isWhite: true))
     }
 }

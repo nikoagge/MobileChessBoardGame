@@ -24,7 +24,7 @@ class RookTests: XCTestCase {
            6 . x . . . . . .
            7 r . . . . . . .
     */
-        XCTAssertFalse(chessEngine.canMovePiece(fromColumn: 0, fromRow: 7, toColumn: 1, toRow: 6, isWhite: true))
+        XCTAssertFalse(chessEngine.canPieceMove(fromColumn: 0, fromRow: 7, toColumn: 1, toRow: 6, isWhite: true))
         
         /*
              0 1 2 3 4 5 6 7
@@ -37,6 +37,6 @@ class RookTests: XCTestCase {
            6 . . . . . . . .
            7 r . . . . . . .
     */
-        XCTAssertFalse(chessEngine.canMovePiece(fromColumn: 0, fromRow: 7, toColumn: 0, toRow: 5, isWhite: true))
+        XCTAssertFalse(chessEngine.canPieceMove(fromColumn: 0, fromRow: 7, toColumn: 0, toRow: 5, isWhite: true))
     }
 }
