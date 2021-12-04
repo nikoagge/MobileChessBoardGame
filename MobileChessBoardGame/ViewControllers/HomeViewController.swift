@@ -24,6 +24,7 @@ class HomeViewController: UIViewController {
     var nearbyServiceAdvertiser: MCNearbyServiceAdvertiser!
     
     var chessRankPromotedTo = "q"
+    var isWhiteDevice = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +48,7 @@ class HomeViewController: UIViewController {
         nearbyServiceAdvertiser.startAdvertisingPeer()
         
         boardView.blackChessPiecesAtTop = false
+        isWhiteDevice = false
         boardView.setNeedsDisplay()
     }
     
@@ -59,9 +61,6 @@ class HomeViewController: UIViewController {
     func updateMove(fromColumn: Int, fromRow: Int, toColumn: Int, toRow: Int) {
         guard chessEngine.canPieceMove(fromColumn: fromColumn, fromRow: fromRow, toColumn: toColumn, toRow: toRow, isWhite: !chessEngine.blackTurn) else { return }
         chessEngine.movePiece(fromColumn: fromColumn, fromRow: fromRow, toColumn: toColumn, toRow: toRow)
-        
-        
-        
         boardView.shadowPieces = chessEngine.pieces
         boardView.setNeedsDisplay()
         
@@ -110,6 +109,16 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController: ChessDelegate {
     func movePiece(fromColumn: Int, fromRow: Int, toColumn: Int, toRow: Int) {
+        if let movingPiece = chessEngine.pieceAt(column: fromColumn, row: fromRow) {
+            if !movingPiece.isBlack != !chessEngine.blackTurn {
+                return
+            }
+        }
+        
+        if session.connectedPeers.count > 0 && isWhiteDevice != !chessEngine.blackTurn {
+            return
+        }
+        
         updateMove(fromColumn: fromColumn, fromRow: fromRow, toColumn: toColumn, toRow: toRow)
         
         if chessEngine.needsPromotion() {
