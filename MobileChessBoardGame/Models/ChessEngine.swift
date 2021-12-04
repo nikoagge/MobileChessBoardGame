@@ -10,7 +10,7 @@ import Foundation
 
 struct ChessEngine {
     var pieces: Set<ChessPiece> = Set<ChessPiece>()
-    var blackTurn = false
+    private(set) var blackTurn = false
     var lastChessPieceMove: ChessPieceMove?
     var whiteKingSideRookMoved = false
     var whiteKingMoved = false
@@ -18,6 +18,28 @@ struct ChessEngine {
     var blackKingSideRookMoved = false
     var blackKingMoved = false
     var blackQueenSideRookMoved = false
+    
+    func needsPromotion() -> Bool {
+        if let lastChessPieceMove = lastChessPieceMove, let piece = pieceAt(column: lastChessPieceMove.toColumn, row: lastChessPieceMove.toRow) {
+            return piece.isBlack && piece.row == 7 || !piece.isBlack && piece.row == 0
+        }
+        
+        return false
+    }
+    
+    mutating func promoteTo(chessRank: ChessRank) {
+        guard let lastChessPieceMove = lastChessPieceMove, let pawn = pieceAt(column: lastChessPieceMove.toColumn, row: lastChessPieceMove.toRow) else { return }
+        pieces.remove(pawn)
+        var imageName: String
+        
+        if chessRank == .queen {
+            imageName = pawn.isBlack ? "Queen-black" : "Queen-white"
+        } else {
+            imageName = pawn.isBlack ? "Knight-black" : "Knight-white"
+        }
+        
+        pieces.insert(ChessPiece(column: pawn.column, row: pawn.row, imageName: imageName, isBlack: pawn.isBlack, chessRank: chessRank))
+    }
     
     mutating func movePiece(fromColumn: Int, fromRow: Int, toColumn: Int, toRow: Int) {
         guard let candidate = pieceAt(column: fromColumn, row: fromRow) else { return }

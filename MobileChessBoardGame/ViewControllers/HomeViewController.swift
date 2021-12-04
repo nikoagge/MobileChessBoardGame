@@ -53,6 +53,39 @@ class HomeViewController: UIViewController {
         browserViewController.delegate = self
         present(browserViewController, animated: true)
     }
+    
+    func updateMove(fromColumn: Int, fromRow: Int, toColumn: Int, toRow: Int) {
+        guard chessEngine.canPieceMove(fromColumn: fromColumn, fromRow: fromRow, toColumn: toColumn, toRow: toRow, isWhite: !chessEngine.blackTurn) else { return }
+        chessEngine.movePiece(fromColumn: fromColumn, fromRow: fromRow, toColumn: toColumn, toRow: toRow)
+        
+        if chessEngine.needsPromotion() {
+            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            let knightAction = UIAlertAction(title: "Knight", style: .default) { _ in
+                self.chessEngine.promoteTo(chessRank: .knight)
+                self.boardView.shadowPieces = self.chessEngine.pieces
+                self.boardView.setNeedsDisplay()
+            }
+            alertController.addAction(knightAction)
+            
+            let queenAction = UIAlertAction(title: "Queen", style: .default) { _ in
+                self.chessEngine.promoteTo(chessRank: .queen)
+                self.boardView.shadowPieces = self.chessEngine.pieces
+                self.boardView.setNeedsDisplay()
+            }
+            alertController.addAction(queenAction)
+            
+            present(alertController, animated: true)
+        }
+        
+        boardView.shadowPieces = chessEngine.pieces
+        boardView.setNeedsDisplay()
+        
+        #if !targetEnvironment(simulator)
+        audioPlayer.play()
+        #endif
+        
+        chessPieceTurnInfoLabel.text = chessEngine.blackTurn ? "Black's turn to move" : "White's turn to move"
+    }
 }
 
 extension HomeViewController: ChessDelegate {
@@ -66,16 +99,6 @@ extension HomeViewController: ChessDelegate {
     
     func pieceAt(column: Int, row: Int) -> ChessPiece? {
         return chessEngine.pieceAt(column: column, row: row)
-    }
-    
-    func updateMove(fromColumn: Int, fromRow: Int, toColumn: Int, toRow: Int) {
-        guard chessEngine.canMovePiece(fromColumn: fromColumn, fromRow: fromRow, toColumn: toColumn, toRow: toRow) else { return }
-        chessEngine.movePiece(fromColumn: fromColumn, fromRow: fromRow, toColumn: toColumn, toRow: toRow)
-        boardView.shadowPieces = chessEngine.pieces
-        boardView.setNeedsDisplay()
-        audioPlayer.play()
-        
-        chessPieceTurnInfoLabel.text = chessEngine.blackTurn ? "Black's turn to move" : "White's turn to move"
     }
 }
 
